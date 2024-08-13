@@ -4,6 +4,7 @@
         "moduleResolution": "Node",
         "outDir": "dist/bin",
         "declaration": true,
+        "declarationMap": true,
         "declarationDir": "dist/types",
     }
 }
