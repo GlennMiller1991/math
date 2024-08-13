@@ -2,7 +2,11 @@
   "name": "@fbltd/math",
   "version": "1.0.2",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/math.ts",
+  "files": [
+    "dist",
+    "README.ms"
+  ],
   "scripts": {
     "build": "node_modules/.bin/tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
