@@ -1,0 +1,23 @@
+{
+  "name": "@fbltd/math",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "build": "node_modules/.bin/tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlennMiller1991/math.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GlennMiller1991/math/issues"
+  },
+  "homepage": "https://github.com/GlennMiller1991/math#readme",
+  "dependencies": {
+    "@fbltd/bundler": "^2.0.15"
+  }
+}

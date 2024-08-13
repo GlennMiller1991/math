@@ -1,0 +1,10 @@
+{
+    "extends": "./node_modules/@fbltd/bundler/tsconfig.json",
+    "compilerOptions": {
+        "moduleResolution": "Node",
+        "outFile": "dist/math.js",
+        "module": "AMD",
+        "sourceMap": true,
+        "declaration": true
+    }
+}

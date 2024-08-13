@@ -1,0 +1,6 @@
+{
+    "mode": "development",
+    "entry": "index.ts",
+    "output": "dist/bundled-file.js",
+    "library": "math"
+}
