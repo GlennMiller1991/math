@@ -8,7 +8,7 @@
     "README.ms"
   ],
   "scripts": {
-    "build": "node_modules/.bin/tsc",
+    "build": "rm -r dist || echo '' && node_modules/.bin/tsc",
     "deploy": "npm run build && npm version patch && git push && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
