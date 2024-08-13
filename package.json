@@ -19,5 +19,8 @@
   "homepage": "https://github.com/GlennMiller1991/math#readme",
   "dependencies": {
     "@fbltd/bundler": "^2.0.15"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
