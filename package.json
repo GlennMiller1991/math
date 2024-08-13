@@ -2,7 +2,8 @@
   "name": "@fbltd/math",
   "version": "1.0.3",
   "description": "",
-  "main": "dist/math.ts",
+  "main": "dist/bin/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
     "README.ms"
