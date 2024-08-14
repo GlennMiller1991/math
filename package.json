@@ -4,6 +4,13 @@
   "description": "",
   "main": "dist/bin/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/bin/index.js",
+      "import": "./dist/bin/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
   "files": [
     "dist",
     "README.ms"
