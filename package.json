@@ -1,39 +1,39 @@
 {
-  "name": "@fbltd/math",
-  "version": "1.0.6",
-  "description": "",
-  "main": "dist/bin/index.js",
-  "types": "dist/types/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/bin/index.js",
-      "import": "./dist/bin/index.js",
-      "types": "./dist/types/index.d.ts"
-    }
-  },
-  "files": [
-    "dist",
-    "README.ms"
-  ],
-  "scripts": {
-    "build": "rm -r dist || echo '' && node_modules/.bin/tsc",
-    "deploy": "npm run build && npm version patch && git push && npm publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GlennMiller1991/math.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GlennMiller1991/math/issues"
-  },
-  "homepage": "https://github.com/GlennMiller1991/math#readme",
-  "dependencies": {
-    "@fbltd/bundler": "^2.0.15"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@fbltd/math",
+	"version": "1.0.6",
+	"description": "",
+	"main": "dist/bin/index.js",
+	"types": "dist/types/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"require": "./dist/bin/index.js",
+			"import": "./dist/bin/index.js",
+			"types": "./dist/types/index.d.ts"
+		}
+	},
+	"files": [
+		"dist",
+		"README.ms"
+	],
+	"scripts": {
+		"build": "rm -r dist || echo '' && node_modules/.bin/tsc",
+		"deploy": "npm run build && npm version patch && git push && npm publish",
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GlennMiller1991/math.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/GlennMiller1991/math/issues"
+	},
+	"homepage": "https://github.com/GlennMiller1991/math#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"devDependencies": {
+		"@fbltd/bundler": "^2.0.37"
+	}
 }

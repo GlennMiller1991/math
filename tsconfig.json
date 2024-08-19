@@ -1,10 +1,3 @@
 {
     "extends": "./node_modules/@fbltd/bundler/tsconfig.json",
-    "compilerOptions": {
-        "moduleResolution": "Node",
-        "outDir": "dist/bin",
-        "declaration": true,
-        "declarationMap": true,
-        "declarationDir": "dist/types",
-    }
 }
