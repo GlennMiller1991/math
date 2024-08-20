@@ -37,6 +37,7 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@fbltd/bundler": "^2.0.46"
+		"@fbltd/bundler": "^2.0.46",
+		"typedoc": "^0.26.6"
 	}
 }
