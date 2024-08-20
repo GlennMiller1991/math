@@ -1,4 +1,4 @@
-import {isCorrectNumber, toPositive} from "./utils";
+import { isCorrectNumber, toPositive } from "./utils";
 
 export enum AngleUnits {
     Deg = 0,
@@ -9,7 +9,11 @@ export enum AngleUnits {
 
 export class Angle {
 
-    // region Converters
+    // #region Converters
+
+    /**
+     * Угол к радианам
+     */
     static toRad(angle: number, unit: AngleUnits = AngleUnits.Deg) {
         switch (unit) {
             case AngleUnits.Rad:
@@ -21,6 +25,9 @@ export class Angle {
         }
     }
 
+    /**
+     * Угол к оборотам
+     */
     static toTurn(angle: number, unit: AngleUnits = AngleUnits.Deg) {
         switch (unit) {
             case AngleUnits.Turn:
@@ -32,6 +39,9 @@ export class Angle {
         }
     }
 
+    /**
+    * Угол к градусам
+    */
     static toDeg(angle: number, unit: AngleUnits = AngleUnits.Rad) {
         switch (unit) {
             case AngleUnits.Deg:
@@ -43,8 +53,9 @@ export class Angle {
         }
     }
 
-    // endregion Converters
-
+    /**
+     * Привести угол к положительному значению и нормализовать
+     */
     static toPositive(angle: number, unit: AngleUnits) {
         switch (unit) {
             case AngleUnits.Deg:
@@ -56,6 +67,13 @@ export class Angle {
         }
     }
 
+    /**
+     * Привести угол к стандантному диапазону
+     * 
+     * Для градусов [0; 360)
+     * Для радианов [0; Math.Pi * 2)
+     * Для оборотов [0; 1)
+     */
     static normalize(angle: number, unit: AngleUnits) {
         switch (unit) {
             // 0 - 359.9999
@@ -69,8 +87,13 @@ export class Angle {
                 return Angle.toPositive(angle, unit) % 1
         }
     }
+    // #endregion Converters
 
-    // region representation
+    // #region representation
+
+    /**
+     * From angle to string "rotate({angle}{units})"
+     */
     static toCSS(angle: number, unit: AngleUnits) {
         if (!isCorrectNumber(angle)) return ''
         return `rotate(${angle}${Angle.angleUnitCorrespondence[unit]})`
@@ -81,7 +104,7 @@ export class Angle {
         [AngleUnits.Turn]: 'turn',
         [AngleUnits.Deg]: 'deg',
     }
-    // endregion representation
+    // #endregion representation
 
 }
 
