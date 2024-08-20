@@ -1,6 +1,0 @@
-{
-    "mode": "production",
-    "entry": "index.ts",
-    "output": "dist/bundled-file.js",
-    "lib": "test"
-}

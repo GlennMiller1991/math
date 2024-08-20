@@ -35,7 +35,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"dependencies": {
-		"@fbltd/bundler": "^2.0.43"
+	"devDependencies": {
+		"@fbltd/bundler": "^2.0.46"
 	}
 }
