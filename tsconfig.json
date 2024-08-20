@@ -1,3 +1,10 @@
 {
     "extends": "./node_modules/@fbltd/bundler/tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist/bin",
+        "declarationDir": "./dist/types",
+    },
+    "include": [
+        "index.ts"
+    ]
 }

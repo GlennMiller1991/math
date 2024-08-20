@@ -19,6 +19,8 @@
 	"scripts": {
 		"build": "rm -r dist || echo '' && node_modules/.bin/tsc",
 		"deploy": "npm run build && npm version patch && git push && npm publish",
+		"make": "node_modules/.bin/fbltd_make",
+		"test": "node_modules/.bin/fbltd_test"
 	},
 	"repository": {
 		"type": "git",
@@ -33,7 +35,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"devDependencies": {
-		"@fbltd/bundler": "^2.0.37"
+	"dependencies": {
+		"@fbltd/bundler": "^2.0.43"
 	}
 }
