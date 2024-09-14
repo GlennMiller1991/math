@@ -2,7 +2,8 @@
 	"compilerOptions": {
 		"outDir": "./dist/bin",
 		"declarationDir": "./dist/types",
-		"declaration": true
+		"declaration": true,
+		"module": "ESNext"
 	},
 	"extends": "./node_modules/@fbltd/bundler/tsconfig.json"
 }
