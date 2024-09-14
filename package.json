@@ -17,6 +17,7 @@
 		"README.ms"
 	],
 	"scripts": {
+		"start": "node_modules/.bin/tsc --watch --noEmit",
 		"clean": "rm -r dist || echo ''",
 		"build": "node_modules/.bin/tsc",
 		"deploy": "npm run clean && npm run build && npm version patch && git push && npm publish && npm run clean",
@@ -37,7 +38,6 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@fbltd/bundler": "^2.0.46",
-		"typedoc": "^0.26.6"
+		"@fbltd/bundler": "^2.0.46"
 	}
 }

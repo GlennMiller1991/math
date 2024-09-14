@@ -1,4 +1,4 @@
-import { Angle, AngleUnits, approximately, identityMatrix, IMatrix2d, Matrix2d } from "../src"
+import { approximately, identityMatrix, Matrix2d, type IMatrix2d } from ".."
 
 describe('Matrix', () => {
     let matrix: IMatrix2d

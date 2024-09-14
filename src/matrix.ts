@@ -1,5 +1,4 @@
-import { Angle, AngleUnits } from "./angle";
-import { IPoint2 } from "./figures";
+import { Angle, AngleUnits, type IPoint2 } from ".";
 
 export type IMatrix2d = [
     number, number, number,

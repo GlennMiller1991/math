@@ -4,7 +4,7 @@
 		"declarationDir": "./dist/types",
 		"declaration": true,
 		"module": "ESNext",
-		"verbatimModuleSyntax": true,
+		"verbatimModuleSyntax": true
 	},
 	"extends": "./node_modules/@fbltd/bundler/tsconfig.json"
 }

@@ -1,6 +1,5 @@
 export * from './angle'
 export * from './matrix'
-export * from './operator'
 export * from './utils'
 export * from './colors'
 export * from './figures'
