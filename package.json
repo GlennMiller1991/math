@@ -1,9 +1,10 @@
 {
 	"name": "@fbltd/math",
-	"version": "1.0.11",
+	"version": "1.0.10",
 	"description": "",
 	"main": "dist/bin/index.js",
 	"types": "dist/types/index.d.ts",
+	"type": "module",
 	"exports": {
 		".": {
 			"require": "./dist/bin/index.js",
