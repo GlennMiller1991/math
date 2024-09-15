@@ -1,4 +1,4 @@
-import { approximately, identityMatrix, Matrix2d, type IMatrix2d } from ".."
+import { approximately, identityMatrix, Matrix2d, type IMatrix2d } from "../index.js"
 
 describe('Matrix', () => {
     let matrix: IMatrix2d

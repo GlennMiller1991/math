@@ -1,5 +1,5 @@
-import type { IPoint2 } from "."
-import { Matrix2d, type IMatrix2d } from ".."
+import type { IPoint2 } from "./index.js"
+import { Matrix2d, type IMatrix2d } from "../index.js"
 
 export class StraightLine {
     constructor(public p1: IPoint2, public p2: IPoint2) {

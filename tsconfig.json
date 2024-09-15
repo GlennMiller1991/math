@@ -3,7 +3,9 @@
 		"outDir": "./dist/bin",
 		"declarationDir": "./dist/types",
 		"declaration": true,
-		"module": "ESNext",
+		"target": "ESNext",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"verbatimModuleSyntax": true
 	},
 	"extends": "./node_modules/@fbltd/bundler/tsconfig.json"

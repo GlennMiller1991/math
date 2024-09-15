@@ -1,3 +1,3 @@
-export * from './point'
-export * from './circle'
-export * from './straight-line'
+export * from './point.js'
+export * from './circle.js'
+export * from './straight-line.js'

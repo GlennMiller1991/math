@@ -1,4 +1,4 @@
-import { Angle, AngleUnits, type IPoint2 } from ".";
+import { Angle, AngleUnits, type IPoint2 } from "./index.js";
 
 export type IMatrix2d = [
     number, number, number,
