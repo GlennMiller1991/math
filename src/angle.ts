@@ -1,4 +1,4 @@
-import { isCorrectNumber, toPositive } from "./utils";
+import { isCorrectNumber, toPositive } from "./utils.js";
 
 export enum AngleUnits {
     Deg = 0,

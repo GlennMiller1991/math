@@ -1,4 +1,4 @@
-import { Angle, AngleUnits, approximately } from "../src"
+import { Angle, AngleUnits, approximately } from "../src/index.js"
 
 describe('math.angle.toDeg', () => {
     test('from Turn', () => {
