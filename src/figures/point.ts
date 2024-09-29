@@ -2,22 +2,24 @@
  * Точка/вектор
  */
 export type IPoint2 = [number, number]
+export type IPoint3 = [number, number, number]
+export type IPoint = IPoint2 | IPoint3
 
-/**
- * Точка/вектор
- */
-export class Point2 {
-    static sum(p1: IPoint2, p2: IPoint2): IPoint2 {
-        return [
-            p1[0] + p2[0],
-            p1[1] + p2[1],
-        ]
+export class Point {
+    static sum<T extends IPoint>(p1: T, p2: T): T {
+        return p1.map((c, i) => c + p2[i]) as T
     }
 
-    static scale(v: IPoint2, factor: number): IPoint2 {
-        return [
-            v[0] * factor,
-            v[1] * factor,
-        ]
+    static scale<T extends IPoint>(p: T, scale: number): T {
+        return p.map((c) => c * scale) as T
     }
+
+    static dif<T extends IPoint>(p1: T, p2: T): T {
+        return p1.map((c, i) => c - p2[i]) as T
+    }
+
+    static abs<T extends IPoint>(p: T): T {
+        return p.map(Math.abs) as T
+    }
+
 }
