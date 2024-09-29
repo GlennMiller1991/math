@@ -1,6 +1,6 @@
 {
 	"name": "@fbltd/math",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"description": "",
 	"main": "dist/bin/index.js",
 	"types": "dist/types/index.d.ts",
