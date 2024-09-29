@@ -1,12 +1,18 @@
 {
 	"compilerOptions": {
-		"outDir": "./dist/bin",
-		"declarationDir": "./dist/types",
-		"declaration": true,
 		"target": "ESNext",
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
+		"outDir": "./dist/bin",
+		"declarationDir": "./dist/types",
+		"declaration": true,
+		"declarationMap": true,
+		"allowSyntheticDefaultImports": true,
+		"removeComments": true,
 		"verbatimModuleSyntax": true
 	},
-	"extends": "./node_modules/@fbltd/bundler/tsconfig.json"
+	"exclude": [
+		"node_modules",
+		"__tests__"
+	]
 }
