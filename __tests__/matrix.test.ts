@@ -1,4 +1,5 @@
-import { approximately, identityMatrix, Matrix2d, type IMatrix2d } from "../index.js"
+import type { IPoint2, IMatrix2d } from '../index.js'
+import { approximately, identityMatrix, Matrix2d } from "../index.js"
 
 describe('Matrix', () => {
     let matrix: IMatrix2d
@@ -52,5 +53,22 @@ describe('Matrix', () => {
         matrix = Matrix2d.skewIdentity(-45, 0)
         expect(approximately(matrix[3], 1)).toBe(true)
 
+    })
+
+    test('apply', () => {
+        const p: IPoint2 = [1, 1];
+
+        const transforms: {transform: IMatrix2d, output: IPoint2}[] = [
+            {transform: identityMatrix, output: p},
+            {transform: Matrix2d.rotateIdentity(90), output: [-1, 1]}
+
+        ]
+
+        let res: IPoint2
+        for (let {transform, output} of transforms) {
+            res = Matrix2d.apply(transform, p)
+            expect(approximately(res[0], output[0])).toBe(true)
+            expect(approximately(res[1], output[1])).toBe(true)
+        }
     })
 })
