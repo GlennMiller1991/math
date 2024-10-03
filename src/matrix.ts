@@ -108,7 +108,8 @@ export class Matrix2d {
         y = Angle.toRad(y, units)
         x = Math.tan(x)
         y = Math.tan(y)
-        return [1, y, x, 1, 0, 0]
+        console.log(x, 'tangent')
+        return [1, -y, -x, 1, 0, 0]
     } 
 
     static skewX(m: IMatrix2d, x: number, units = AngleUnits.Deg): IMatrix2d {
