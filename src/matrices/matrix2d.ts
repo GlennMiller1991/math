@@ -1,11 +1,10 @@
-import { Angle, AngleUnits, type IPoint2 } from "./index.js";
+import { Angle, AngleUnits, type IPoint2 } from "../index.js";
+import type { IFixedLengthArray } from "../type.utils.js";
 
-export type IMatrix2d = [
-    number, number, number,
-    number, number, number,
-]
+export type IMatrix2d = IFixedLengthArray<6, number>
 
-export const identityMatrix: IMatrix2d = [1, 0, 0, 1, 0, 0]
+export const identityMatrix2d: IMatrix2d = Object.freeze([1, 0, 0, 1, 0, 0]) as IMatrix2d;
+
 export function getIdentityMatrix(): IMatrix2d {
     return [1, 0, 0, 1, 0, 0]
 }
@@ -108,9 +107,8 @@ export class Matrix2d {
         y = Angle.toRad(y, units)
         x = Math.tan(x)
         y = Math.tan(y)
-        console.log(x, 'tangent')
         return [1, -y, -x, 1, 0, 0]
-    } 
+    }
 
     static skewX(m: IMatrix2d, x: number, units = AngleUnits.Deg): IMatrix2d {
         return Matrix2d.multiply(m, Matrix2d.skewIdentity(x, 0, units))

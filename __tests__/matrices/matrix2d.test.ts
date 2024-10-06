@@ -1,18 +1,27 @@
-import type { IPoint2, IMatrix2d } from '../index.js'
-import { approximately, identityMatrix, Matrix2d } from "../index.js"
+import type { IPoint2, IMatrix2d } from '../../index.js'
+import { approximately, identityMatrix2d, Matrix2d } from "../../index.js"
 
-describe('Matrix', () => {
+describe('Matrix2d', () => {
     let matrix: IMatrix2d
 
+    test('identity matrix should be freezed', () => {
+        matrix = [...identityMatrix2d]
+        const assign = () => {
+            identityMatrix2d[1] = 4
+        }
+        expect(assign).toThrow()
+        expect(matrix).toEqual(identityMatrix2d)
+    })
+
     test('should be the same', () => {
-        matrix = identityMatrix
-        matrix = Matrix2d.multiply(matrix, identityMatrix)
-        expect(matrix).toEqual(identityMatrix)
-        expect(matrix).not.toBe(identityMatrix)
+        matrix = identityMatrix2d
+        matrix = Matrix2d.multiply(matrix, identityMatrix2d)
+        expect(matrix).toEqual(identityMatrix2d)
+        expect(matrix).not.toBe(identityMatrix2d)
     })
 
     test('transform', () => {
-        matrix = identityMatrix
+        matrix = identityMatrix2d
 
         // translate x 10
         matrix = Matrix2d.translate(matrix, 10)
@@ -59,7 +68,7 @@ describe('Matrix', () => {
         const p: IPoint2 = [1, 1];
 
         const transforms: { transform: IMatrix2d, output: IPoint2 }[] = [
-            { transform: identityMatrix, output: p },
+            { transform: identityMatrix2d, output: p },
             { transform: Matrix2d.rotateIdentity(90), output: [-1, 1] },
             { transform: Matrix2d.rotateIdentity(-90), output: [1, -1] },
             { transform: Matrix2d.scaleIdentity(2), output: [2, 2] },
