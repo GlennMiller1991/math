@@ -1,4 +1,4 @@
-import { Angle, AngleUnits, type IPoint2 } from "../index.js";
+import { Angle, AngleUnits, approximately, type IPoint2 } from "../index.js";
 import type { IFixedLengthArray } from "../type.utils.js";
 
 export type IMatrix2d = IFixedLengthArray<6, number>
@@ -120,5 +120,27 @@ export class Matrix2d {
 
     static skew(m: IMatrix2d, x: number, y = 0, units = AngleUnits.Deg): IMatrix2d {
         return Matrix2d.multiply(m, Matrix2d.skewIdentity(x, y, units))
+    }
+
+    static isApproximatelyEqual(m1: IMatrix2d, m2: IMatrix2d) {
+        return (
+            approximately(m1[0], m2[0]) &&
+            approximately(m1[1], m2[1]) &&
+            approximately(m1[2], m2[2]) &&
+            approximately(m1[3], m2[3]) &&
+            approximately(m1[4], m2[4]) &&
+            approximately(m1[5], m2[5])
+        )
+    }
+
+    static isEqual(m1: IMatrix2d, m2: IMatrix2d) {
+        return (
+            m1[0], m2[0] &&
+            m1[1], m2[1] &&
+            m1[2], m2[2] &&
+            m1[3], m2[3] &&
+            m1[4], m2[4] &&
+            m1[5], m2[5]
+        )
     }
 }

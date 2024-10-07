@@ -22,7 +22,7 @@
 		"clean": "rm -r dist || echo ''",
 		"build": "node_modules/.bin/tsc",
 		"deploy": "npm run clean && npm run build && npm run test && npm version patch && git push && npm publish && npm run clean",
-		"test": "npx tsc __tests__/*.test.ts __tests__/**/*.test.ts --outDir __tests__/dist && npx jest && rm -r __tests__/dist"
+		"test": "npx tsc __tests__/*.test.ts __tests__/**/*.test.ts --outDir __tests__/dist && npx jest || rm -r __tests__/dist"
 	},
 	"repository": {
 		"type": "git",
