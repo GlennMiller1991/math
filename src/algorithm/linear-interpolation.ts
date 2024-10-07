@@ -6,8 +6,7 @@ export type IControlPoint = {
 }
 export class LinearInterpolation {
 
-
-    private static interpolateArray(atPoint: number, controlPoints: INonEmptyArray<IControlPoint>) {
+    static interpolateArray(atPoint: number, controlPoints: INonEmptyArray<IControlPoint>) {
         let cp: IControlPoint
         let cpNext: IControlPoint
         for (let i = 0; i < controlPoints.length - 1; i++) {
@@ -26,7 +25,7 @@ export class LinearInterpolation {
         return undefined
     }
 
-    private static interpolateBetween(start: IControlPoint, end: IControlPoint, atPoint: number) {
+    static interpolateBetween(start: IControlPoint, end: IControlPoint, atPoint: number) {
         const coef = (atPoint - start.controlPoint) / (end.controlPoint - start.controlPoint);
         return (end.value - start.value) * coef + start.value
     }

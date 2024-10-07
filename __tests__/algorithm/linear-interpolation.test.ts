@@ -9,7 +9,6 @@ describe('linear interpolation', () => {
         let a: IControlPoint
         let b: IControlPoint
 
-        //@ts-ignore   method is static private
         const method = LinearInterpolation.interpolateBetween
         a = { controlPoint: 0, value: 0 }; b = { controlPoint: 100, value: 100 }
 
@@ -35,7 +34,6 @@ describe('linear interpolation', () => {
         let c: IControlPoint
         let d: IControlPoint
 
-        //@ts-ignore   method is static private
         const method = LinearInterpolation.interpolateArray
         a = { controlPoint: 0, value: 0 }; b = { controlPoint: 100, value: 100 }
 
