@@ -4,7 +4,6 @@ import { approximately } from '../../src/utils';
 
 describe('linear interpolation', () => {
 
-
     test('interpolate between', () => {
         let a: IControlPoint
         let b: IControlPoint
