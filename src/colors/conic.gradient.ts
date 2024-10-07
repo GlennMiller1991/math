@@ -19,11 +19,11 @@ export class ConicGradient {
     getColorAtAngle(angle: number) {
         let prev = undefined
         let next = undefined
-        for (let color of this.colors) {
-            if (color.angle === angle) return color.color
-            if (color.angle < angle) prev = color
-            if (color.angle > angle) {
-                next = color
+        for (let entry of this.colors) {
+            if (entry.angle === angle) return entry.color
+            if (entry.angle < angle) prev = entry
+            if (entry.angle > angle) {
+                next = entry
                 break
             }
         }
