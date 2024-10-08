@@ -108,7 +108,6 @@ export class Matrix2d {
         y = Angle.toRad(y, units)
         x = Math.tan(x)
         y = Math.tan(y)
-        console.log(x, 'tangent')
         return [1, -y, -x, 1, 0, 0]
     } 
 
