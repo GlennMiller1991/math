@@ -110,30 +110,35 @@ describe('math.angle.normalize', () => {
     })
 })
 
-describe('math.angle.toCSS', () => {
-    expect(Angle.toCSS(1, AngleUnits.Deg)).toEqual('rotate(1deg)')
-    expect(Angle.toCSS(1, AngleUnits.Rad)).toEqual('rotate(1rad)')
-    expect(Angle.toCSS(1, AngleUnits.Turn)).toEqual('rotate(1turn)')
+describe('Angle.toCSS', () => {
+    test('math.angle.toCSS', () => {
+        expect(Angle.toCSS(1, AngleUnits.Deg)).toEqual('rotate(1deg)')
+        expect(Angle.toCSS(1, AngleUnits.Rad)).toEqual('rotate(1rad)')
+        expect(Angle.toCSS(1, AngleUnits.Turn)).toEqual('rotate(1turn)')
 
-    expect(Angle.toCSS(-1, AngleUnits.Deg)).toEqual('rotate(-1deg)')
-    expect(Angle.toCSS(-1, AngleUnits.Rad)).toEqual('rotate(-1rad)')
-    expect(Angle.toCSS(-1, AngleUnits.Turn)).toEqual('rotate(-1turn)')
+        expect(Angle.toCSS(-1, AngleUnits.Deg)).toEqual('rotate(-1deg)')
+        expect(Angle.toCSS(-1, AngleUnits.Rad)).toEqual('rotate(-1rad)')
+        expect(Angle.toCSS(-1, AngleUnits.Turn)).toEqual('rotate(-1turn)')
 
-    expect(Angle.toCSS(NaN, AngleUnits.Deg)).toEqual('')
-    expect(Angle.toCSS(Infinity, AngleUnits.Rad)).toEqual('')
-    expect(Angle.toCSS(-Infinity, AngleUnits.Turn)).toEqual('')
+        expect(Angle.toCSS(NaN, AngleUnits.Deg)).toEqual('')
+        expect(Angle.toCSS(Infinity, AngleUnits.Rad)).toEqual('')
+        expect(Angle.toCSS(-Infinity, AngleUnits.Turn)).toEqual('')
 
-    //@ts-ignore
-    expect(Angle.toCSS('1e -08', AngleUnits.Deg)).toEqual('')
+        //@ts-ignore
+        expect(Angle.toCSS('1e -08', AngleUnits.Deg)).toEqual('')
 
-    //@ts-ignore
-    expect(Angle.toCSS(undefined, AngleUnits.Deg)).toEqual('')
+        //@ts-ignore
+        expect(Angle.toCSS(undefined, AngleUnits.Deg)).toEqual('')
 
-    //@ts-ignore
-    expect(Angle.toCSS(null, AngleUnits.Deg)).toEqual('')
+        //@ts-ignore
+        expect(Angle.toCSS(null, AngleUnits.Deg)).toEqual('')
+    })
 })
 
-describe('math angle ofPoint', () => {
-    expect(Angle.ofPoint([1, 1], true)).toBe(-45)
-    expect(Angle.ofPoint([1, 1], false)).toBe(45)
+describe('Angle.ofPoint', () => {
+    test('should be correct', () => {
+        expect(Angle.ofPoint([1, 1], true)).toBe(-45)
+        expect(Angle.ofPoint([1, 1], false)).toBe(45)
+        expect(approximately(Angle.ofPoint([0, 0]), 0)).toBe(true)
+    })
 })
