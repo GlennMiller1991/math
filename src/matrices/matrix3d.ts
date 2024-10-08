@@ -1,4 +1,4 @@
-import { approximately } from "../../index.js";
+import { approximately, type IPoint3 } from "../../index.js";
 import type { IFixedLengthArray, INonEmptyArray } from "../type.utils.js";
 
 export type IMatrix3d = IFixedLengthArray<12, number>
@@ -30,6 +30,14 @@ export class Matrix3d {
         }
 
         return matrix
+    }
+
+    static apply(matrix: IMatrix3d, point: IPoint3): IPoint3 {
+        return [
+            point[0] * matrix[0] + point[1] * matrix[3] + point[2] * matrix[6] + matrix[9],
+            point[0] * matrix[1] + point[1] * matrix[4] + point[2] * matrix[7] + matrix[10],
+            point[0] * matrix[2] + point[1] * matrix[5] + point[2] * matrix[8] + matrix[11],
+        ]
     }
 
     static isApproximatelyEqual(m1: IMatrix3d, m2: IMatrix3d) {
