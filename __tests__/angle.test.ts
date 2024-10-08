@@ -132,3 +132,8 @@ describe('math.angle.toCSS', () => {
     //@ts-ignore
     expect(Angle.toCSS(null, AngleUnits.Deg)).toEqual('')
 })
+
+describe('math angle ofPoint', () => {
+    expect(Angle.ofPoint([1, 1], true)).toBe(-45)
+    expect(Angle.ofPoint([1, 1], false)).toBe(45)
+})

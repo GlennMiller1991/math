@@ -1,3 +1,4 @@
+import type { IPoint2 } from "../index.js";
 import { isCorrectNumber, toPositive } from "./utils.js";
 
 export enum AngleUnits {
@@ -6,10 +7,22 @@ export enum AngleUnits {
     Turn = 2,
 }
 
+interface IConverter {
+    (angle: number, unit: AngleUnits): number
+}
+
 
 export class Angle {
 
     // #region Converters
+
+    static ofPoint(point: IPoint2, clockwise = true, units: AngleUnits = AngleUnits.Deg) {
+        let angle: number
+        if (!clockwise) angle = Math.atan2(point[1], point[0])
+        else angle = Math.atan2(-point[1], point[0])
+
+        return this.unitFunctionMapping[units](angle, AngleUnits.Rad)
+    }
 
     /**
      * Угол к радианам
@@ -96,13 +109,19 @@ export class Angle {
      */
     static toCSS(angle: number, unit: AngleUnits) {
         if (!isCorrectNumber(angle)) return ''
-        return `rotate(${angle}${Angle.angleUnitCorrespondence[unit]})`
+        return `rotate(${angle}${Angle.angleStringMapping[unit]})`
     }
 
-    static angleUnitCorrespondence: Record<AngleUnits, string> = {
+    private static angleStringMapping: Record<AngleUnits, string> = {
         [AngleUnits.Rad]: 'rad',
         [AngleUnits.Turn]: 'turn',
         [AngleUnits.Deg]: 'deg',
+    }
+
+    private static unitFunctionMapping: Record<AngleUnits, IConverter> = {
+        [AngleUnits.Rad]: this.toRad,
+        [AngleUnits.Deg]: this.toDeg,
+        [AngleUnits.Turn]: this.toTurn,
     }
     // #endregion representation
 
