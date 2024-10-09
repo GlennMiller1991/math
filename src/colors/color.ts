@@ -1,21 +1,15 @@
-export type IColor = {
-    red: number,
-    green: number,
-    blue: number
-}
-
-export class Color implements IColor {
+export class Color {
     constructor(public red: number, public green: number, public blue: number) {
-        this.red = Math.max(Math.min(red, 255), 0)
-        this.green = Math.max(Math.min(green, 255), 0)
-        this.blue = Math.max(Math.min(blue, 255), 0)
+        this.red = Math.max(Math.min(Math.round(red), 255), 0)
+        this.green = Math.max(Math.min(Math.round(green), 255), 0)
+        this.blue = Math.max(Math.min(Math.round(blue), 255), 0)
     }
 
     toCSS() {
         return Color.toCSS(this)
     }
 
-    isEqual(c: IColor) {
+    isEqual(c: Color) {
         return Color.areEquals(this, c)
     }
 
@@ -27,15 +21,15 @@ export class Color implements IColor {
         )
     }
 
-    static toNumber(color: IColor) {
+    static toNumber(color: Color) {
         return (((color.red << 16) | color.green) << 16) | color.blue
     }
 
-    static areEquals(c1: IColor, c2: IColor) {
+    static areEquals(c1: Color, c2: Color) {
         return Color.toNumber(c1) === Color.toNumber(c2)
     }
 
-    static toCSS(color: IColor) {
+    static toCSS(color: Color) {
         return `rgb(${color.red},${color.green},${color.blue})`
     }
 
