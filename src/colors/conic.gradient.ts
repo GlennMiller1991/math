@@ -42,11 +42,11 @@ export class ConicGradient {
     getAngleByColor(color: Color) {
         let prev: typeof this.colors[number]
         let next = this.colors[0]
-        if (color.red === next.color.red && color.green === next.color.green && color.blue === next.color.blue) return next.angle
+        if (color.isEqual(next.color)) return next.angle
         for (let i = 1; i < this.colors.length; i++) {
             next = this.colors[i]
             prev = this.colors[i - 1]
-            if (color.red === next.color.red && color.green === next.color.green && color.blue === next.color.blue) return next.angle
+            if (color.isEqual(next.color)) return next.angle
 
             let redDif = next.color.red - prev.color.red
             let greenDif = next.color.green - prev.color.green
