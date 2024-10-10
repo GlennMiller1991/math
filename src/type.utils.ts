@@ -14,3 +14,7 @@ export type IFixedLengthArray<TLength extends number, TItem> =
     number extends TLength ? never :
     TLength extends number ? IFixedLengthArrayUtil<TLength, TItem, [TItem]> :
     never
+
+export function validateType(value: never): never {
+    throw new Error('Wrong type passed into')
+}

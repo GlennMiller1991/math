@@ -1,5 +1,5 @@
-import { approximately, type IPoint3 } from "../../index.js";
-import type { IFixedLengthArray, INonEmptyArray } from "../type.utils.js";
+import { Angle, AngleUnits, approximately, type IPoint3 } from "../../index.js";
+import { validateType, type IFixedLengthArray, type INonEmptyArray } from "../type.utils.js";
 
 export type IMatrix3d = IFixedLengthArray<12, number>
 
@@ -40,37 +40,96 @@ export class Matrix3d {
         ]
     }
 
-    static isApproximatelyEqual(m1: IMatrix3d, m2: IMatrix3d) {
-        return (
-            approximately(m1[0], m2[0]) &&
-            approximately(m1[1], m2[1]) &&
-            approximately(m1[2], m2[2]) &&
-            approximately(m1[3], m2[3]) &&
-            approximately(m1[4], m2[4]) &&
-            approximately(m1[5], m2[5]) &&
-            approximately(m1[6], m2[6]) &&
-            approximately(m1[7], m2[7]) &&
-            approximately(m1[8], m2[8]) &&
-            approximately(m1[9], m2[9]) &&
-            approximately(m1[10], m2[10]) &&
-            approximately(m1[11], m2[11])
+    static translateIdentity(x: number, y = 0, z = 0): IMatrix3d {
+        return [
+            1, 0, 0, 0, 1, 0, 0, 0, 1, x, y, z
+        ]
+    }
+
+    static scaleIdentity(x: number, y = 1, z = 1): IMatrix3d {
+        return [
+            x, 0, 0, 0, y, 0, 0, 0, z, 0, 0, 0
+        ]
+    }
+
+    static rotateIdentity(axis: 'x' | 'y' | 'z', value: number, unit: AngleUnits): IMatrix3d {
+        value = Angle.toRad(value, unit)
+        const cos = Math.cos(value)
+        const sin = Math.sin(value)
+        switch (axis) {
+            case "x":
+                return [1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0]
+            case "y":
+                return [cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0]
+            case "z":
+                return [cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0]
+        }
+
+        validateType(axis)
+    }
+
+    static translate(m: IMatrix3d, x: number, y = 0, z = 0): IMatrix3d {
+        return Matrix3d.multiply(m, Matrix3d.translateIdentity(x, y, z))
+    }
+
+    static translateX(m: IMatrix3d, x: number): IMatrix3d {
+        return Matrix3d.translate(m, x)
+    }
+
+    static translateY(m: IMatrix3d, y: number): IMatrix3d {
+        return Matrix3d.translate(m, 0, y)
+    }
+
+    static translateZ(m: IMatrix3d, z: number): IMatrix3d {
+        return Matrix3d.translate(m, 0, 0, z)
+    }
+
+    static scale(m: IMatrix3d, x: number, y?: number, z?: number): IMatrix3d {
+        return Matrix3d.multiply(
+            m,
+            Matrix3d.scaleIdentity(x, y, z)
         )
     }
 
-    static isEqual(m1: IMatrix3d, m2: IMatrix3d) {
-        return (
-            m1[0], m2[0] &&
-            m1[1], m2[1] &&
-            m1[2], m2[2] &&
-            m1[3], m2[3] &&
-            m1[4], m2[4] &&
-            m1[5], m2[5] &&
-            m1[6], m2[6] &&
-            m1[7], m2[7] &&
-            m1[8], m2[8] &&
-            m1[9], m2[9] &&
-            m1[10], m2[10] &&
-            m1[11], m2[11]
+    static scaleX(m: IMatrix3d, x: number): IMatrix3d {
+        return Matrix3d.scale(m, x)
+    }
+
+    static scaleY(m: IMatrix3d, y: number): IMatrix3d {
+        return Matrix3d.scale(m, 1, y)
+    }
+
+    static scaleZ(m: IMatrix3d, z: number): IMatrix3d {
+        return Matrix3d.scale(m, 1, 1, z)
+    }
+
+    static rotateX(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
+        return Matrix3d.multiply(
+            m,
+            Matrix3d.rotateIdentity('x', angle, units)
         )
+    }
+
+    static rotateY(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
+        return Matrix3d.multiply(
+            m,
+            Matrix3d.rotateIdentity('y', angle, units)
+        )
+    }
+
+    static rotateZ(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
+        return Matrix3d.multiply(
+            m,
+            Matrix3d.rotateIdentity('z', angle, units)
+        )
+    }
+
+
+    static isApproximatelyEqual(m1: IMatrix3d, m2: IMatrix3d) {
+        return m1.every((element, index) => approximately(element, m2[index]))
+    }
+
+    static isEqual(m1: IMatrix3d, m2: IMatrix3d) {
+        return m1.every((element, index) => element === m2[index])
     }
 }

@@ -123,24 +123,10 @@ export class Matrix2d {
     }
 
     static isApproximatelyEqual(m1: IMatrix2d, m2: IMatrix2d) {
-        return (
-            approximately(m1[0], m2[0]) &&
-            approximately(m1[1], m2[1]) &&
-            approximately(m1[2], m2[2]) &&
-            approximately(m1[3], m2[3]) &&
-            approximately(m1[4], m2[4]) &&
-            approximately(m1[5], m2[5])
-        )
+        return m1.every((element, index) => approximately(element, m2[index]))
     }
 
     static isEqual(m1: IMatrix2d, m2: IMatrix2d) {
-        return (
-            m1[0], m2[0] &&
-            m1[1], m2[1] &&
-            m1[2], m2[2] &&
-            m1[3], m2[3] &&
-            m1[4], m2[4] &&
-            m1[5], m2[5]
-        )
+        return m1.every((element, index) => element === m2[index])
     }
 }
