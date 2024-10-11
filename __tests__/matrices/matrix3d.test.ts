@@ -58,4 +58,68 @@ describe('Matrix3d', () => {
         expect(res[10]).toBe(matrix[10])
         expect(res[11]).toBe(matrix[11] + add)
     })
+
+    test('scale identity', () => {
+        matrix = Matrix3d.scaleIdentity(2)
+        
+        expect(Matrix3d.isApproximatelyEqual(matrix, [2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0])).toBe(true)
+        matrix = Matrix3d.scaleIdentity(1, 2)
+        expect(Matrix3d.isApproximatelyEqual(matrix, [1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0])).toBe(true)
+        matrix = Matrix3d.scaleIdentity(1, 1, 2)
+        expect(Matrix3d.isApproximatelyEqual(matrix, [1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0])).toBe(true)
+    })
+
+    test('scale', () => {
+        matrix = Matrix3d.scaleIdentity(2)
+
+        let res: IMatrix3d
+        res = Matrix3d.scale(matrix, 2)
+        expect(Matrix3d.isApproximatelyEqual(res, matrix)).toBe(false)
+        expect(res[0]).toBe(4)
+        expect(res[1]).toBe(0)
+        
+        res = Matrix3d.scale(res, 1, .5, 3)
+        expect(res[0]).toBe(4)
+        expect(res[1]).toBe(0)
+        expect(res[4]).toBe(.5)
+        expect(res[8]).toBe(3)
+
+        res = Matrix3d.scale(res, 1, 1, 3)
+        expect(res[0]).toBe(4)
+        expect(res[1]).toBe(0)
+        expect(res[4]).toBe(.5)
+        expect(res[8]).toBe(9)
+    })
+
+    test('scale + translate', () => {
+        matrix = Matrix3d.translateX(identityMatrix3d, 5)
+
+        expect(matrix[9]).toBe(5)
+
+        let res: IMatrix3d
+        res = Matrix3d.scaleX(matrix, 2)
+        expect(res[0]).toBe(2)
+        expect(res[4]).toBe(1)
+        expect(res[8]).toBe(1)
+        expect(res[9]).toBe(5)
+
+        res  = Matrix3d.translateX(res, 3)
+        expect(res[0]).toBe(2)
+        expect(res[4]).toBe(1)
+        expect(res[8]).toBe(1)
+        expect(res[9]).toBe(11)
+
+        res = Matrix3d.scaleY(res, .5)
+        expect(res[0]).toBe(2)
+        expect(res[4]).toBe(.5)
+        expect(res[8]).toBe(1)
+        expect(res[9]).toBe(11)
+
+        res = Matrix3d.translateY(res, 5)
+        expect(res[0]).toBe(2)
+        expect(res[4]).toBe(.5)
+        expect(res[8]).toBe(1)
+        expect(res[9]).toBe(11)
+        expect(res[10]).toBe(2.5)
+    })
 })

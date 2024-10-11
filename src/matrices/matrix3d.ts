@@ -87,7 +87,7 @@ export class Matrix3d {
     static scale(m: IMatrix3d, x: number, y?: number, z?: number): IMatrix3d {
         return Matrix3d.multiply(
             m,
-            Matrix3d.scaleIdentity(x, y, z)
+            Matrix3d.scaleIdentity(x, y, z),
         )
     }
 
@@ -106,7 +106,7 @@ export class Matrix3d {
     static rotateX(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
         return Matrix3d.multiply(
             m,
-            Matrix3d.rotateIdentity('x', angle, units)
+            Matrix3d.rotateIdentity('x', angle, units),
         )
     }
 
