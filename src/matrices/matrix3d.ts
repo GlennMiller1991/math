@@ -52,20 +52,25 @@ export class Matrix3d {
         ]
     }
 
-    static rotateIdentity(axis: 'x' | 'y' | 'z', value: number, unit: AngleUnits): IMatrix3d {
+    static rotateIdentityX(value: number, unit: AngleUnits = AngleUnits.Deg): IMatrix3d {
         value = Angle.toRad(value, unit)
         const cos = Math.cos(value)
         const sin = Math.sin(value)
-        switch (axis) {
-            case "x":
-                return [1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0]
-            case "y":
-                return [cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0]
-            case "z":
-                return [cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0]
-        }
+        return [1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0]
+    }
 
-        validateType(axis)
+    static rotateIdentityY(value: number, unit: AngleUnits = AngleUnits.Deg): IMatrix3d {
+        value = Angle.toRad(value, unit)
+        const cos = Math.cos(value)
+        const sin = Math.sin(value)
+        return [cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0]
+    }
+
+    static rotateIdentityZ(value: number, unit: AngleUnits = AngleUnits.Deg): IMatrix3d {
+        value = Angle.toRad(value, unit)
+        const cos = Math.cos(value)
+        const sin = Math.sin(value)
+        return [cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0]
     }
 
     static translate(m: IMatrix3d, x: number, y = 0, z = 0): IMatrix3d {
@@ -106,21 +111,21 @@ export class Matrix3d {
     static rotateX(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
         return Matrix3d.multiply(
             m,
-            Matrix3d.rotateIdentity('x', angle, units),
+            Matrix3d.rotateIdentityX(angle, units),
         )
     }
 
     static rotateY(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
         return Matrix3d.multiply(
             m,
-            Matrix3d.rotateIdentity('y', angle, units)
+            Matrix3d.rotateIdentityY(angle, units)
         )
     }
 
     static rotateZ(m: IMatrix3d, angle: number, units: AngleUnits = AngleUnits.Deg) {
         return Matrix3d.multiply(
             m,
-            Matrix3d.rotateIdentity('z', angle, units)
+            Matrix3d.rotateIdentityZ(angle, units)
         )
     }
 

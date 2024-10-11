@@ -61,7 +61,7 @@ describe('Matrix3d', () => {
 
     test('scale identity', () => {
         matrix = Matrix3d.scaleIdentity(2)
-        
+
         expect(Matrix3d.isApproximatelyEqual(matrix, [2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0])).toBe(true)
         matrix = Matrix3d.scaleIdentity(1, 2)
         expect(Matrix3d.isApproximatelyEqual(matrix, [1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0])).toBe(true)
@@ -77,7 +77,7 @@ describe('Matrix3d', () => {
         expect(Matrix3d.isApproximatelyEqual(res, matrix)).toBe(false)
         expect(res[0]).toBe(4)
         expect(res[1]).toBe(0)
-        
+
         res = Matrix3d.scale(res, 1, .5, 3)
         expect(res[0]).toBe(4)
         expect(res[1]).toBe(0)
@@ -103,7 +103,7 @@ describe('Matrix3d', () => {
         expect(res[8]).toBe(1)
         expect(res[9]).toBe(5)
 
-        res  = Matrix3d.translateX(res, 3)
+        res = Matrix3d.translateX(res, 3)
         expect(res[0]).toBe(2)
         expect(res[4]).toBe(1)
         expect(res[8]).toBe(1)
@@ -145,5 +145,17 @@ describe('Matrix3d', () => {
         expect(res[9]).toBe(11)
         expect(res[10]).toBe(2.5)
         expect(res[11]).toBe(6)
+    })
+
+    test('rotate identity', () => {
+        matrix = Matrix3d.rotateIdentityZ(90)
+        expect(approximately(matrix[0], 0)).toBe(true)
+        expect(approximately(matrix[1], 1)).toBe(true)
+        expect(approximately(matrix[3], -1)).toBe(true)
+        expect(approximately(matrix[4], 0)).toBe(true)
+        expect(approximately(matrix[8], 1)).toBe(true)
+        expect(approximately(matrix[9], 0)).toBe(true)
+        expect(approximately(matrix[10], 0)).toBe(true)
+        expect(approximately(matrix[11], 0)).toBe(true)
     })
 })
