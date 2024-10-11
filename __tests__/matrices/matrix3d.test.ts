@@ -158,4 +158,24 @@ describe('Matrix3d', () => {
         expect(approximately(matrix[10], 0)).toBe(true)
         expect(approximately(matrix[11], 0)).toBe(true)
     })
+
+    test('transform', () => {
+        matrix = Matrix3d.translateIdentity(15, -5, 0.5)
+
+        expect(Matrix3d.isApproximatelyEqual(matrix, [1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -5, 0.5])).toBe(true)
+        matrix = Matrix3d.rotateX(matrix, 3)
+        expect(Matrix3d.isApproximatelyEqual(matrix, [1, 0, 0, 0, 0.998629, 0.05233, 0, -0.05233, 0.998629, 15, -5, 0.5], 0.01)).toBe(true)
+        matrix = Matrix3d.rotateX(matrix, 3)
+        const cmpMatrix: IMatrix3d = [1, 0, 0, 0, 0.994521450741, 0.10451651114, 0, -0.10451651114, 0.994521450741, 15, -5, 0.5]
+        expect(Matrix3d.isApproximatelyEqual(matrix, cmpMatrix, 0.01)).toBe(true)
+        matrix = Matrix3d.multiply(cmpMatrix, [1, 0, 0, 0, -0.06975, 0.99756, 0, -0.99756, -0.06975, 0, 0, 0])
+        expect(Matrix3d.isApproximatelyEqual(matrix, [1, 0, 0, 0, -0.17362936204200316, 0.984804791749177, 0, -0.984804791749177, -0.17362936204200316, 15, -5, 0.5], 0.01)).toBe(true)
+
+        matrix = Matrix3d.multiply(Matrix3d.scaleIdentity(1, 1, 30), matrix)
+        expect(Matrix3d.isApproximatelyEqual(
+            matrix,
+            [1, 0, 0, 0, -0.17362936204200316, 29.54414375247531, 0, -0.984804791749177, -5.20888086126009470, 15, -5, 15],
+            0.01
+        )).toBe(true)
+    })
 })

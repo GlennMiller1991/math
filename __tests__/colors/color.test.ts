@@ -37,20 +37,21 @@ describe('Color', () => {
         expect(color.blue).toBe(0x30)
     })
 
-    test('toCss', () => {
+    test('toString', () => {
 
-        const regexp = /rgb\(\d*,\d*,\d*\)/
+        const regexp = /rgba\(\d*,\d*,\d*,\d*\)/
         function testRegexp(test: string) {
             return regexp.test(test)
         }
 
         color = new Color(125, 32, 4)
 
-        expect(testRegexp(color.toCSS())).toBe(true)
-        expect(color.toCSS()).toBe('rgb(125,32,4)')
+        expect(testRegexp(color.toString('rgba'))).toBe(true)
+        expect(color.toString('rgba')).toBe('rgba(125,32,4,1)')
 
         color = new Color(255, 0, 34)
-        expect(testRegexp(color.toCSS())).toBe(true)
-        expect(color.toCSS()).toBe('rgb(255,0,34)')
+        expect(testRegexp(color.toString('rgba'))).toBe(true)
+        expect(color.toString('rgba')).toBe('rgba(255,0,34,1)')
+        expect(new Color(0xff, 0x43, 0x54).toString()).toBe('#ff4354ff')
     })
 })

@@ -15,3 +15,11 @@ export function isCorrectNumber(value: any) {
     }
     return false
 }
+
+export function normalize(value: number, top: number, bottom = 0) {
+    return (value - bottom) / (top - bottom)
+}
+
+export function denormalize(value: number, top: number, bottom = 0) {
+    return (top - bottom) * value + bottom
+}

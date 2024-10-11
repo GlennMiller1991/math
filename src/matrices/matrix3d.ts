@@ -130,8 +130,8 @@ export class Matrix3d {
     }
 
 
-    static isApproximatelyEqual(m1: IMatrix3d, m2: IMatrix3d) {
-        return m1.every((element, index) => approximately(element, m2[index]))
+    static isApproximatelyEqual(m1: IMatrix3d, m2: IMatrix3d, withPrecision?: number) {
+        return m1.every((element, index) => approximately(element, m2[index], withPrecision))
     }
 
     static isEqual(m1: IMatrix3d, m2: IMatrix3d) {

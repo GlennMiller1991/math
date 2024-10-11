@@ -81,7 +81,7 @@ export class ConicGradient {
     toCanvas(ctx: CanvasRenderingContext2D, center: IPoint2) {
         const gradient = ctx.createConicGradient(0, ...center as [number, number])
         for (let color of this.colors) {
-            gradient.addColorStop(color.angle, color.color.toCSS())
+            gradient.addColorStop(color.angle, color.color.toString())
         }
 
         return gradient
