@@ -129,7 +129,6 @@ export class Matrix3d {
         )
     }
 
-
     static isApproximatelyEqual(m1: IMatrix3d, m2: IMatrix3d, withPrecision?: number) {
         return m1.every((element, index) => approximately(element, m2[index], withPrecision))
     }
@@ -137,4 +136,47 @@ export class Matrix3d {
     static isEqual(m1: IMatrix3d, m2: IMatrix3d) {
         return m1.every((element, index) => element === m2[index])
     }
+
+    static determinant(m: IMatrix3d) {
+        return m[0] * m[4] * m[8] +
+            m[3] * m[7] * m[2] +
+            m[6] * m[1] * m[5] -
+            m[6] * m[4] * m[2] -
+            m[3] * m[1] * m[8] -
+            m[0] * m[7] * m[5]
+    }
+
+    static multiplyByNumber(m: IMatrix3d, value: number): IMatrix3d {
+        return m.map(c => c * value) as IMatrix3d
+    }
+
+    private static minors = [
+        (m: IMatrix3d) => m[4] * m[8] - m[7] * m[5],
+        (m: IMatrix3d) => m[1] * m[8] - m[7] * m[2],
+        (m: IMatrix3d) => m[1] * m[5] - m[4] * m[2],
+        (m: IMatrix3d) => m[3] * m[8] - m[9] * m[5],
+        (m: IMatrix3d) => m[0] * m[8] - m[9] * m[2],
+        (m: IMatrix3d) => m[0] * m[4] - m[3] * m[2],
+        (m: IMatrix3d) => m[3] * m[7] - m[6] * m[4],
+        (m: IMatrix3d) => m[0] * m[7] - m[1] * m[6],
+        (m: IMatrix3d) => m[0] * m[4] - m[1] * m[3],
+        (m: IMatrix3d) => m[3] * m[7] * m[11] +
+            m[6] * m[10] * m[5] +
+            m[9] * m[4] * m[8] -
+            m[9] * m[7] * m[5] -
+            m[6] * m[4] * m[11] -
+            m[3] * m[10] * m[8],
+        (m: IMatrix3d) => m[0] * m[4] * m[11] +
+            m[6] * m[10] * m[2] +
+            m[9] * m[1] * m[8] -
+            m[0] * m[10] * m[8] -
+            m[9] * m[7] * m[2] -
+            m[6] * m[1] * m[11],
+        (m: IMatrix3d) => m[0] * m[4] * m[11] +
+            m[3] * m[10] * m[2] +
+            m[9] * m[1] * m[5] -
+            m[9] * m[4] * m[2] -
+            m[3] * m[1] * m[11] -
+            m[0] * m[1] * m[5]
+    ]
 }

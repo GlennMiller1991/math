@@ -8,43 +8,9 @@ export const identityMatrix2d: IMatrix2d = Object.freeze([1, 0, 0, 1, 0, 0]) as 
 export function getIdentityMatrix(): IMatrix2d {
     return [1, 0, 0, 1, 0, 0]
 }
-/**
- * Класс операций над матрицами двумерного пространства.
- * 
- * Матрица двумерного пространства характеризуется тремя столбцами и тремя строками. 
- * Однако в реализации, так как двумерное простраснтво не обладает осью Z, третья строка усечена,
- * оставшиеся две строки и три столбца собраны в плоский массив, где:
- * m[0], m[1] разложение вектора X по осям X/Y
- * m[2], m[3] разложение вектора Y по осям X/Y
- * m[4], m[5] разложение вектора Z по осям X/Y для проективных плоскостей.
- * При этом условное смещение по оси Z для проектинвых плоскостей равна единице
- * То есть полный вид матрицы бы выглядел следующим образом
- * [
- *      [1, 0, 0],
- *      [0, 1, 0],
- *      [0, 0, 1],
- * ],
- * после усечения 
- * [
- *      [1, 0, 0],
- *      [0, 1, 0],
- * ] 
- * и в реализации
- * [
- *      1, 0, 0, 1, 0, 0
- * ]
- */
+
 export class Matrix2d {
 
-    /**
-     * Последовательное наложение матриц трансформации к результату
-     * предыдущего наложения. По сути, умножение двух и более матриц
-     * 
-     * Умножение двух матриц суть применение трансформации к трансформации, при этом
-     * порядок при умножении важен - m1 * m2 !== m2 * m1
-     * 
-     * Первая переданная матрица - первый трансформ, и далее последовательное наложение трансформов
-     */
     static multiply(matrix: IMatrix2d, ...matrices: IMatrix2d[]) {
         for (let m of matrices) {
             matrix = [
@@ -129,4 +95,38 @@ export class Matrix2d {
     static isEqual(m1: IMatrix2d, m2: IMatrix2d) {
         return m1.every((element, index) => element === m2[index])
     }
+
+    static determinant(m: IMatrix2d) {
+        return m[0] * m[3] - m[1] * m[2]
+    }
+
+    static multiplyByNumber(m: IMatrix2d, value: number): IMatrix2d {
+        return m.map((c) => c * value) as IMatrix2d
+    }
+
+    static invert(m: IMatrix2d): IMatrix2d {
+        const d = Matrix2d.determinant(m)
+        if (!d) return [0, 0, 0, 0, 0, 0]
+        return Matrix2d.multiplyByNumber(
+            m.map((c, i) => Matrix2d.adjoints[i](m)) as IMatrix2d,
+            1 / d)
+    }
+
+    private static adjoints = [
+        (m: IMatrix2d) => Matrix2d.minors[0](m),
+        (m: IMatrix2d) => -Matrix2d.minors[1](m),
+        (m: IMatrix2d) => -Matrix2d.minors[2](m),
+        (m: IMatrix2d) => Matrix2d.minors[3](m),
+        (m: IMatrix2d) => Matrix2d.minors[4](m),
+        (m: IMatrix2d) => -Matrix2d.minors[5](m)
+    ]
+
+    private static minors = [
+        (m: IMatrix2d) => m[3],
+        (m: IMatrix2d) => m[1],
+        (m: IMatrix2d) => m[2],
+        (m: IMatrix2d) => m[0],
+        (m: IMatrix2d) => m[2] * m[5] - m[4] * m[3],
+        (m: IMatrix2d) => m[0] * m[5] - m[4] * m[1]
+    ]
 }
