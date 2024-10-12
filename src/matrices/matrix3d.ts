@@ -150,6 +150,30 @@ export class Matrix3d {
         return m.map(c => c * value) as IMatrix3d
     }
 
+    static invert(m: IMatrix3d): IMatrix3d {
+        const d = Matrix3d.determinant(m)
+        if (!d) return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        return Matrix3d.multiplyByNumber(
+            m.map((c, i) => Matrix3d.adjoints[i](m)) as IMatrix3d,
+            1 / d
+        )
+    }
+
+    private static adjoints = [
+        (m: IMatrix3d) => Matrix3d.minors[0](m),
+        (m: IMatrix3d) => -Matrix3d.minors[1](m),
+        (m: IMatrix3d) => Matrix3d.minors[2](m),
+        (m: IMatrix3d) => -Matrix3d.minors[3](m),
+        (m: IMatrix3d) => Matrix3d.minors[4](m),
+        (m: IMatrix3d) => -Matrix3d.minors[5](m),
+        (m: IMatrix3d) => Matrix3d.minors[6](m),
+        (m: IMatrix3d) => -Matrix3d.minors[7](m),
+        (m: IMatrix3d) => Matrix3d.minors[8](m),
+        (m: IMatrix3d) => -Matrix3d.minors[9](m),
+        (m: IMatrix3d) => Matrix3d.minors[10](m),
+        (m: IMatrix3d) => -Matrix3d.minors[11](m),
+    ]
+
     private static minors = [
         (m: IMatrix3d) => m[4] * m[8] - m[7] * m[5],
         (m: IMatrix3d) => m[1] * m[8] - m[7] * m[2],
