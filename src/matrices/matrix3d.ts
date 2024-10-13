@@ -178,9 +178,9 @@ export class Matrix3d {
         (m: IMatrix3d) => m[4] * m[8] - m[7] * m[5],
         (m: IMatrix3d) => m[1] * m[8] - m[7] * m[2],
         (m: IMatrix3d) => m[1] * m[5] - m[4] * m[2],
-        (m: IMatrix3d) => m[3] * m[8] - m[9] * m[5],
-        (m: IMatrix3d) => m[0] * m[8] - m[9] * m[2],
-        (m: IMatrix3d) => m[0] * m[4] - m[3] * m[2],
+        (m: IMatrix3d) => m[3] * m[8] - m[6] * m[5],
+        (m: IMatrix3d) => m[0] * m[8] - m[6] * m[2],
+        (m: IMatrix3d) => m[0] * m[5] - m[3] * m[2],
         (m: IMatrix3d) => m[3] * m[7] - m[6] * m[4],
         (m: IMatrix3d) => m[0] * m[7] - m[1] * m[6],
         (m: IMatrix3d) => m[0] * m[4] - m[1] * m[3],
@@ -190,7 +190,7 @@ export class Matrix3d {
             m[9] * m[7] * m[5] -
             m[6] * m[4] * m[11] -
             m[3] * m[10] * m[8],
-        (m: IMatrix3d) => m[0] * m[4] * m[11] +
+        (m: IMatrix3d) => m[0] * m[7] * m[11] +
             m[6] * m[10] * m[2] +
             m[9] * m[1] * m[8] -
             m[0] * m[10] * m[8] -
@@ -201,6 +201,6 @@ export class Matrix3d {
             m[9] * m[1] * m[5] -
             m[9] * m[4] * m[2] -
             m[3] * m[1] * m[11] -
-            m[0] * m[1] * m[5]
+            m[0] * m[10] * m[5]
     ]
 }

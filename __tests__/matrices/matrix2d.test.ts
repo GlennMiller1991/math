@@ -87,16 +87,18 @@ describe('Matrix2d', () => {
     })
 
     test('determinant', () => {
+        expect(approximately(Matrix2d.determinant(identityMatrix2d), 1)).toBe(true)
+        expect(approximately(Matrix2d.determinant([0, 0, 0, 1, 0, 0]), 0)).toBe(true)
+
         expect(Matrix2d.determinant([2, -1, 0.5, 1, 5, 0])).toBe(2.5)
         expect(approximately(Matrix2d.determinant([2, -1, 0.5, 0.34, 5, -23]), 1.18)).toBe(true)
         expect(approximately(Matrix2d.determinant([-4, -1, 0.5, 0.34, 5, -23]), -0.86)).toBe(true)
-        expect(approximately(Matrix2d.determinant(identityMatrix2d), 1)).toBe(true)
-        expect(approximately(Matrix2d.determinant([0, 0, 0, 1, 0, 0]), 0)).toBe(true)
     })
 
     test('invert', () => {
         expect(Matrix2d.isApproximatelyEqual(identityMatrix2d, Matrix2d.invert(identityMatrix2d))).toBe(true)
         expect(Matrix2d.isApproximatelyEqual([0, 0, 0, 0, 0, 0], Matrix2d.invert([0, 0, 0, 1, 0, 0]))).toBe(true)
+
         expect(Matrix2d.isApproximatelyEqual([-17/43, -50/43, 25/43, (4 * 43 + 28) / 43, (15 * 43 + 15) / 43, (112 * 43 + 34) / 43], Matrix2d.invert([-4, -1, 0.5, 0.34, 5, -23]))).toBe(true)
         expect(Matrix2d.isApproximatelyEqual([17/59, 50/59, -25/59, 100/59, -(11 * 59 + 11)/59, (34 * 59 + 44) / 59], Matrix2d.invert([2, -1, 0.5, 0.34, 5, -23]))).toBe(true)
         expect(Matrix2d.isApproximatelyEqual([0.4, 0.4, -0.2, 0.8, -2, -2], Matrix2d.invert([2, -1, 0.5, 1, 5, 0]))).toBe(true)

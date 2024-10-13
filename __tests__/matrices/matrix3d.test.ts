@@ -1,4 +1,4 @@
-import { approximately, identityMatrix3d, Matrix3d, type IMatrix3d } from "../../src"
+import { approximately, identityMatrix3d, Matrix2d, Matrix3d, type IMatrix3d } from "../../src"
 
 describe('Matrix3d', () => {
     let matrix: IMatrix3d
@@ -177,5 +177,60 @@ describe('Matrix3d', () => {
             [1, 0, 0, 0, -0.17362936204200316, 29.54414375247531, 0, -0.984804791749177, -5.20888086126009470, 15, -5, 15],
             0.01
         )).toBe(true)
+    })
+
+    let first: IMatrix3d = [2, -1, 7, 0.5, 1, -4, 5, 0, -1, 0, 6, 4]
+    let second: IMatrix3d = [2, -1, -2, 0.5, 1, -4, 5, 0, -1, 3, 6, 4]
+    let third: IMatrix3d = [2, -1, -2, 0.5, 1, -4, 5, -1, -1, 3, 0.5, 0.3]
+    let fourth: IMatrix3d = [2, 20, -20, 0.5, 1, -4, 5, -30, -1, 3, 0.5, 0.3]
+    test('determinant', () => {
+        expect(approximately(Matrix3d.determinant(identityMatrix3d), 1)).toBe(true)
+        expect(approximately(Matrix3d.determinant([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]), 0))
+            .toBe(true)
+            
+        expect(approximately(
+            Matrix3d.determinant(first), -17.5)
+        ).toBe(true)
+
+        expect(approximately(
+            Matrix3d.determinant(second), 27.5
+        )).toBe(true)
+
+        expect(approximately(
+            Matrix3d.determinant(third), 20.5
+        )).toBe(true)
+
+
+        expect(approximately(
+            Matrix3d.determinant(fourth), -232
+        )).toBe(true)
+    })
+
+    test('invertion', () => {
+        expect(Matrix3d.isApproximatelyEqual(identityMatrix3d, Matrix3d.invert(identityMatrix3d))).toBe(true)
+        expect(Matrix3d.isApproximatelyEqual([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            Matrix3d.invert([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]))).toBe(true)
+
+        expect(Matrix3d.isApproximatelyEqual(
+            Matrix3d.invert(first),
+            [2/35, 2/35, 6/35, 39/35, 74/35, -23/35, 2/7, 2/7, -1/7, -(7 * 35 + 29)/35, -(13 * 35 + 29)/35, (4 * 35 + 18)/35]
+        )).toBe(true)
+
+        expect(Matrix3d.isApproximatelyEqual(
+            Matrix3d.invert(second),
+            [-2/55, -2/55, 12/55, -39/55, 16/55, 14/55, -2/11, -2/11, 1/11, (5 * 11 + 1)/11, -10/11, -(2 * 11 + 6)/11]
+        )).toBe(true)
+
+
+        expect(Matrix3d.isApproximatelyEqual(
+            Matrix3d.invert(third),
+            [-10/41, 2/41, 12/41, -39/41, 16/41, 14/41, -11/41, -6/41, 5/41, 264/205, -61/205, -89/82]
+        )).toBe(true)
+
+        expect(Matrix3d.isApproximatelyEqual(
+            Matrix3d.invert(fourth),
+            [121/232, -(2 * 58 + 39)/58, 15/58, 39/464, -49/116, 1 / 116, 5/ 58, -20/29, 1/29, -(928 + 587)/928, (8 * 232 + 101)/232, -917/1160]
+        )).toBe(true)
+ 
     })
 })
