@@ -140,5 +140,8 @@ describe('Angle.ofPoint', () => {
         expect(Angle.ofPoint([1, 1], true)).toBe(-45)
         expect(Angle.ofPoint([1, 1], false)).toBe(45)
         expect(approximately(Angle.ofPoint([0, 0]), 0)).toBe(true)
+        expect(Angle.ofPoint([0, 1])).toBe(-90)
+        expect(Angle.ofPoint([0, 1], true)).toBe(-90)
+        expect(Angle.ofPoint([0, 1], false)).toBe(90)
     })
 })

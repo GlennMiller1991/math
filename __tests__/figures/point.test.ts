@@ -30,4 +30,9 @@ describe('points test', () => {
         expect(Point.scale(a2, 2)).toEqual([20, -20])
         expect(Point.scale(a3, -2)).toEqual([-20, 20, 20])
     })
+
+    test('dot product', () => {
+        expect(Point.dotProduct([4, -3], [2, 1])).toBe(5)
+        expect(Point.dotProduct([5, -7], [1, -2])).toBe(19)
+    })
 })

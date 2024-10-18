@@ -22,4 +22,10 @@ export class Point {
         return p.map(Math.abs) as T
     }
 
+    static dotProduct<T extends IPoint>(p1: T, p2: T): number {
+        return p1.reduce((acc, c, index) => {
+            return acc + c * p2[index]
+        }, 0)
+    }
+
 }
