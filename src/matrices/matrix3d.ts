@@ -1,5 +1,5 @@
 import { Angle, AngleUnits, approximately, type IPoint3 } from "../../index.js";
-import { validateType, type IFixedLengthArray, type INonEmptyArray } from "../type.utils.js";
+import {type IFixedLengthArray, type INonEmptyArray } from "../type.utils.js";
 
 export type IMatrix3d = IFixedLengthArray<12, number>
 

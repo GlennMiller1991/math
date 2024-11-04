@@ -28,4 +28,41 @@ export class Point {
         }, 0)
     }
 
+    /**
+     * Векторное произведение. 
+     * @returns вектор, перпендикулярный плоскости, образованной двумя переданными векторами.
+     *  Модуль вектора численно равен площади параллелорамма, построенного на переданных векторах.
+     *  На этом факте формула и построена.
+     */
+    static crossProduct(a: IPoint3, b: IPoint3): IPoint3 {
+        return [
+            a[1] * b[2] - b[1] * a[2],
+            a[2] * b[0] - a[0] * b[2],
+            a[0] * b[1] - b[0] * a[1],
+        ]
+    }
+
+    /**
+     * Смешанное произведение векторов.
+     * Скалярное произведение вектора dotFactor на векторное произведение векторов
+     * crossFactorA и crossFactorB
+     * 
+     * @return скаляр, равный объёму ориентированного параллелограмма, 
+     * построенного на переданных векторах
+     */
+    static tripleProduct(crossFactorA: IPoint3, crossFactorB: IPoint3, dotFactor): number {
+        return Point.dotProduct(
+            Point.crossProduct(crossFactorA, crossFactorB),
+            dotFactor
+        )
+    }
+
+    /**
+     *  Нормаль к поверхности, образованной тремя переданными точками
+     *  @returns вектор
+     */
+    static normal(p1: IPoint3, p2: IPoint3, p3: IPoint3): IPoint3 {
+        return Point.crossProduct(Point.dif(p2, p1), Point.dif(p3, p1))
+    }
+
 }

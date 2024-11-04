@@ -45,8 +45,8 @@ export class Color {
         return this.toString()
     }
 
-    toString(format: Parameters<typeof Color.toString>[1] = 'hex') {
-        return Color.toString(this, format)
+    toString(format: Parameters<typeof Color.representation>[1] = 'hex') {
+        return Color.representation(this, format)
     }
 
     toNumber() {
@@ -82,7 +82,7 @@ export class Color {
         return Color.toNumber(c1) === Color.toNumber(c2)
     }
 
-    static toString(color: Color, format: 'rgba' | 'hex' = 'hex') {
+    static representation(color: Color, format: 'rgba' | 'hex' = 'hex') {
         switch (format) {
             case "rgba":
                 return `rgba(${color.red},${color.green},${color.blue},${normalizeShade(color.alpha)})`
