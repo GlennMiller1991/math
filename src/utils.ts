@@ -8,12 +8,9 @@ export function toPositive(value: number, range: number) {
 }
 
 export function isCorrectNumber(value: any) {
-    let v: number = +value
-    if (!isNaN(value) && isFinite(value)) {
-        v = parseFloat(value)
-        return !isNaN(v) && isFinite(v)
-    }
-    return false
+    const v1 = parseFloat(value);
+    const v2 = +value;
+    return !Array.isArray(value) && v1 === v2 && !isNaN(v1) && isFinite(v1)
 }
 
 export function normalize(value: number, top: number, bottom = 0) {
