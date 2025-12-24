@@ -1,4 +1,4 @@
-import {centroid, type IPoint2, IPoint3} from "@src";
+import {centroid, type IPoint2, type IPoint3} from "@src";
 
 describe('Centroid', () => {
 
