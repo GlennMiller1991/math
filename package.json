@@ -1,6 +1,6 @@
 {
   "name": "@fbltd/math",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "description": "Math and geometry utilities",
   "sideEffects": false,
   "main": "dist/bin/index.js",
