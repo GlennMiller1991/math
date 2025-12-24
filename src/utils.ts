@@ -20,3 +20,23 @@ export function normalize(value: number, top: number, bottom = 0) {
 export function denormalize(value: number, top: number, bottom = 0) {
     return (top - bottom) * value + bottom
 }
+
+export function isPositive(n: number) {
+    return !isNaN(n) && n > 0;
+}
+
+export function isNegative(n: number) {
+    return !isNaN(n) && n < 0;
+}
+
+export function isInteger(n: number) {
+    return !isNaN(n) && isFinite(n) && (n - (n % 1)) === n;
+}
+
+export function isNatural(n: number) {
+    return isPositive(n) && isInteger(n);
+}
+
+export function isNonNegativeInteger(n: number) {
+    return !isNegative(n) && isInteger(n);
+}

@@ -1,4 +1,13 @@
-import {approximately, isCorrectNumber, toPositive} from "@src"
+import {
+    approximately,
+    isCorrectNumber,
+    isInteger,
+    isNatural,
+    isNegative,
+    isNonNegativeInteger,
+    isPositive,
+    toPositive
+} from "@src"
 
 test('approximately', () => {
     expect(approximately(0, 0)).toBe(true)
@@ -91,8 +100,14 @@ test('isCorrectNumber', () => {
         {test: [""], result: false},
 
         // === ФУНКЦИИ (false) ===
-        {test: () => {}, result: false},
-        {test: function () {}, result: false},
+        {
+            test: () => {
+            }, result: false
+        },
+        {
+            test: function () {
+            }, result: false
+        },
         {test: parseInt, result: false},
 
 
@@ -118,5 +133,268 @@ test('isCorrectNumber', () => {
     for (let {test, result} of testCases) {
         expect(isCorrectNumber(test)).toBe(result);
     }
+});
 
-})
+test('isPositive', () => {
+    const testCases = [
+        // === ПОЛОЖИТЕЛЬНЫЕ ЧИСЛА (true) ===
+        {test: 1, result: true},
+        {test: 100, result: true},
+        {test: 0.1, result: true},
+        {test: 0.000001, result: true},
+        {test: 999999999, result: true},
+        {test: 3.14, result: true},
+        {test: 1e10, result: true},
+        {test: 0.5, result: true},
+
+        // === НОЛЬ И ОТРИЦАТЕЛЬНЫЕ (false) ===
+        {test: 0, result: false},
+        {test: -0, result: false},
+        {test: -1, result: false},
+        {test: -100, result: false},
+        {test: -0.1, result: false},
+        {test: -0.000001, result: false},
+        {test: -999999999, result: false},
+        {test: -3.14, result: false},
+        {test: -1e10, result: false},
+        {test: -0.5, result: false},
+
+        // === СПЕЦИАЛЬНЫЕ ЗНАЧЕНИЯ ===
+        {test: Infinity, result: true},
+        {test: -Infinity, result: false},
+        {test: NaN, result: false},
+
+        // === ГРАНИЧНЫЕ ЗНАЧЕНИЯ ===
+        {test: Number.MAX_VALUE, result: true},
+        {test: Number.MIN_VALUE, result: true}, // минимальное положительное число > 0
+        {test: -Number.MAX_VALUE, result: false},
+        {test: -Number.MIN_VALUE, result: false},
+
+        // === НЕОБЫЧНЫЕ СЛУЧАИ ===
+        {test: 0.00000000000000000000000000000001, result: true},
+        {test: -0.00000000000000000000000000000001, result: false},
+        {test: 1.7976931348623157e+308, result: true}, // MAX_VALUE
+        {test: -1.7976931348623157e+308, result: false},
+        {test: 5e-324, result: true}, // MIN_VALUE
+        {test: -5e-324, result: false}
+    ];
+
+    for (let {test, result} of testCases) {
+        expect(isPositive(test)).toBe(result);
+    }
+});
+
+test('isNegative', () => {
+    const testCases = [
+        // === ОТРИЦАТЕЛЬНЫЕ ЧИСЛА (true) ===
+        {test: -1, result: true},
+        {test: -100, result: true},
+        {test: -0.1, result: true},
+        {test: -0.000001, result: true},
+        {test: -999999999, result: true},
+        {test: -3.14, result: true},
+        {test: -1e10, result: true},
+        {test: -0.5, result: true},
+
+        // === НОЛЬ И ПОЛОЖИТЕЛЬНЫЕ (false) ===
+        {test: 0, result: false},
+        {test: -0, result: false},
+        {test: 1, result: false},
+        {test: 100, result: false},
+        {test: 0.1, result: false},
+        {test: 0.000001, result: false},
+        {test: 999999999, result: false},
+        {test: 3.14, result: false},
+        {test: 1e10, result: false},
+        {test: 0.5, result: false},
+
+        // === СПЕЦИАЛЬНЫЕ ЗНАЧЕНИЯ ===
+        {test: Infinity, result: false},
+        {test: -Infinity, result: true},
+        {test: NaN, result: false},
+
+        // === ГРАНИЧНЫЕ ЗНАЧЕНИЯ ===
+        {test: Number.MAX_VALUE, result: false},
+        {test: Number.MIN_VALUE, result: false},
+        {test: -Number.MAX_VALUE, result: true},
+        {test: -Number.MIN_VALUE, result: true},
+
+        // === НЕОБЫЧНЫЕ СЛУЧАИ ===
+        {test: 0.00000000000000000000000000000001, result: false},
+        {test: -0.00000000000000000000000000000001, result: true},
+        {test: 1.7976931348623157e+308, result: false},
+        {test: -1.7976931348623157e+308, result: true},
+        {test: 5e-324, result: false},
+        {test: -5e-324, result: true}
+    ];
+
+    for (let {test, result} of testCases) {
+        expect(isNegative(test)).toBe(result);
+    }
+});
+
+test('isInteger', () => {
+    const testCases = [
+        // === ЦЕЛЫЕ ЧИСЛА (true) ===
+        {test: 0, result: true},
+        {test: 1, result: true},
+        {test: -1, result: true},
+        {test: 100, result: true},
+        {test: -100, result: true},
+        {test: 999999999, result: true},
+        {test: -999999999, result: true},
+        {test: 1e10, result: true},
+        {test: -1e10, result: true},
+
+        // === НЕЦЕЛЫЕ ЧИСЛА (false) ===
+        {test: 0.1, result: false},
+        {test: 0.000001, result: false},
+        {test: 0.5, result: false},
+        {test: 3.14, result: false},
+        {test: -0.1, result: false},
+        {test: -0.000001, result: false},
+        {test: -0.5, result: false},
+        {test: -3.14, result: false},
+        {test: 1.5, result: false},
+        {test: -2.7, result: false},
+
+        // === СПЕЦИАЛЬНЫЕ ЗНАЧЕНИЯ ===
+        {test: Infinity, result: false},
+        {test: -Infinity, result: false},
+        {test: NaN, result: false},
+
+        // === ГРАНИЧНЫЕ ЗНАЧЕНИЯ ===
+        {test: Number.MAX_SAFE_INTEGER, result: true},
+        {test: Number.MIN_SAFE_INTEGER, result: true},
+        {test: Number.MAX_VALUE, result: true},
+        {test: Number.MIN_VALUE, result: false},
+
+        // === НЕОБЫЧНЫЕ СЛУЧАИ ===
+        {test: 0.0, result: true},
+        {test: -0.0, result: true},
+        {test: 1.0, result: true},
+        {test: -1.0, result: true},
+        {test: 0.9999999999999999, result: false}, // округлится до 1
+    ];
+
+    for (let {test, result} of testCases) {
+        expect(isInteger(test)).toBe(result);
+    }
+});
+
+test('isNatural', () => {
+    const testCases = [
+        // === НАТУРАЛЬНЫЕ ЧИСЛА (true) ===
+        {test: 1, result: true},
+        {test: 2, result: true},
+        {test: 100, result: true},
+        {test: 999999999, result: true},
+        {test: 1e10, result: true},
+
+        // === НЕ НАТУРАЛЬНЫЕ (false) ===
+        {test: 0, result: false},
+        {test: -0, result: false},
+        {test: -1, result: false},
+        {test: -100, result: false},
+        {test: -999999999, result: false},
+        {test: -1e10, result: false},
+        {test: 0.1, result: false},
+        {test: 0.000001, result: false},
+        {test: 0.5, result: false},
+        {test: 3.14, result: false},
+        {test: -0.1, result: false},
+        {test: -0.000001, result: false},
+        {test: -0.5, result: false},
+        {test: -3.14, result: false},
+        {test: 1.5, result: false},
+        {test: -2.7, result: false},
+
+        // === СПЕЦИАЛЬНЫЕ ЗНАЧЕНИЯ ===
+        {test: Infinity, result: false},
+        {test: -Infinity, result: false},
+        {test: NaN, result: false},
+
+        // === ГРАНИЧНЫЕ ЗНАЧЕНИЯ ===
+        {test: Number.MAX_SAFE_INTEGER, result: true},
+        {test: Number.MIN_SAFE_INTEGER, result: false},
+
+        // === ОЧЕНЬ БОЛЬШИЕ/МАЛЕНЬКИЕ ЧИСЛА ===
+        {test: Number.MAX_VALUE, result: true},
+        {test: -Number.MAX_VALUE, result: false},
+        {test: Number.MIN_VALUE, result: false},
+        {test: -Number.MIN_VALUE, result: false},
+
+        // === НЕОБЫЧНЫЕ СЛУЧАИ ===
+        {test: 0.0, result: false},
+        {test: -0.0, result: false},
+        {test: 1.0, result: true},
+        {test: -1.0, result: false},
+        {test: 1.0000000000001, result: false},
+        {test: 9007199254740991, result: true},
+        {test: -9007199254740991, result: false},
+        {test: 9007199254740992, result: true},
+        {test: -9007199254740992, result: false},
+        {test: 0.9999999999999999, result: false},
+    ];
+
+    for (let {test, result} of testCases) {
+        expect(isNatural(test)).toBe(result);
+    }
+});
+
+test('isNonNegativeInteger', () => {
+    const testCases = [
+        // === ЦЕЛЫЕ НЕОТРИЦАТЕЛЬНЫЕ (true) ===
+        {test: 0, result: true},
+        {test: 1, result: true},
+        {test: 2, result: true},
+        {test: 100, result: true},
+        {test: 999999999, result: true},
+        {test: 1e10, result: true},
+
+        // === ОТРИЦАТЕЛЬНЫЕ ИЛИ НЕЦЕЛЫЕ (false) ===
+        {test: -1, result: false},
+        {test: -100, result: false},
+        {test: -999999999, result: false},
+        {test: -1e10, result: false},
+        {test: 0.1, result: false},
+        {test: 0.000001, result: false},
+        {test: 0.5, result: false},
+        {test: 3.14, result: false},
+        {test: -0.1, result: false},
+        {test: -0.000001, result: false},
+        {test: -0.5, result: false},
+        {test: -3.14, result: false},
+        {test: 1.5, result: false},
+        {test: -2.7, result: false},
+
+        // === СПЕЦИАЛЬНЫЕ ЗНАЧЕНИЯ ===
+        {test: Infinity, result: false},
+        {test: -Infinity, result: false},
+        {test: NaN, result: false},
+
+        // === ГРАНИЧНЫЕ ЗНАЧЕНИЯ ===
+        {test: Number.MAX_SAFE_INTEGER, result: true},
+        {test: Number.MIN_SAFE_INTEGER, result: false},
+
+        // === ОЧЕНЬ БОЛЬШИЕ/МАЛЕНЬКИЕ ЧИСЛА ===
+        {test: Number.MAX_VALUE, result: true},
+        {test: -Number.MAX_VALUE, result: false},
+        {test: Number.MIN_VALUE, result: false},
+        {test: -Number.MIN_VALUE, result: false},
+
+        // === НЕОБЫЧНЫЕ СЛУЧАИ ===
+        {test: 0.0, result: true},
+        {test: -0.0, result: true}, // -0 это 0
+        {test: 1.0, result: true},
+        {test: -1.0, result: false},
+        {test: 1.0000000000001, result: false},
+        {test: 9007199254740991, result: true},
+        {test: -9007199254740991, result: false},
+        {test: 0.9999999999999999, result: false},
+    ];
+
+    for (let {test, result} of testCases) {
+        expect(isNonNegativeInteger(test)).toBe(result);
+    }
+});
