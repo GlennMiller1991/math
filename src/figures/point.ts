@@ -6,6 +6,13 @@ export type IPoint3 = [number, number, number]
 export type IPoint = IPoint2 | IPoint3
 
 export class Point {
+    static distance(p1: IPoint2, p2: IPoint2): number {
+        return p1.reduce((acc, _, i) => {
+            return acc + (p1[i] - p2[i]) ** 2;
+        }, 0) ** 0.5;
+
+    }
+
     static sum<T extends IPoint>(...ps: T[]): T {
         let sum = ps[0];
 
@@ -20,7 +27,7 @@ export class Point {
         return p.map((c) => c * scale) as T
     }
 
-    static dif<T extends IPoint>(p1: T, p2: T): T {
+    static sub<T extends IPoint>(p1: T, p2: T): T {
         return p1.map((c, i) => c - p2[i]) as T
     }
 
@@ -68,7 +75,7 @@ export class Point {
      *  @returns вектор
      */
     static normal(p1: IPoint3, p2: IPoint3, p3: IPoint3): IPoint3 {
-        return Point.crossProduct(Point.dif(p2, p1), Point.dif(p3, p1))
+        return Point.crossProduct(Point.sub(p2, p1), Point.sub(p3, p1))
     }
 
 }
