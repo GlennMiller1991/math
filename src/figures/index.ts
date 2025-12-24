@@ -1,3 +1,3 @@
-export * from './point.js'
-export * from './circle.js'
-export * from './straight-line.js'
+export * from './point.ts';
+export * from './circle.ts';
+export * from './straight-line.ts';

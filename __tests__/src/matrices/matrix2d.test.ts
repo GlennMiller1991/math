@@ -1,5 +1,4 @@
-import type { IPoint2, IMatrix2d } from '../../index.js'
-import { approximately, identityMatrix2d, Matrix2d } from "../../index.js"
+import {approximately, identityMatrix2d, Matrix2d, type IPoint2, type IMatrix2d} from "@src"
 
 describe('Matrix2d', () => {
     let matrix: IMatrix2d
@@ -68,18 +67,18 @@ describe('Matrix2d', () => {
         const p: IPoint2 = [1, 1];
 
         const transforms: { transform: IMatrix2d, output: IPoint2 }[] = [
-            { transform: identityMatrix2d, output: p },
-            { transform: Matrix2d.rotateIdentity(90), output: [-1, 1] },
-            { transform: Matrix2d.rotateIdentity(-90), output: [1, -1] },
-            { transform: Matrix2d.scaleIdentity(2), output: [2, 2] },
-            { transform: Matrix2d.scaleIdentity(-2), output: [-2, -2] },
-            { transform: Matrix2d.scaleIdentity(2, -2), output: [2, -2] },
-            { transform: Matrix2d.skewIdentity(-45, 0), output: [2, 1] }
+            {transform: identityMatrix2d, output: p},
+            {transform: Matrix2d.rotateIdentity(90), output: [-1, 1]},
+            {transform: Matrix2d.rotateIdentity(-90), output: [1, -1]},
+            {transform: Matrix2d.scaleIdentity(2), output: [2, 2]},
+            {transform: Matrix2d.scaleIdentity(-2), output: [-2, -2]},
+            {transform: Matrix2d.scaleIdentity(2, -2), output: [2, -2]},
+            {transform: Matrix2d.skewIdentity(-45, 0), output: [2, 1]}
         ]
 
 
         let res: IPoint2
-        for (let { transform, output } of transforms) {
+        for (let {transform, output} of transforms) {
             res = Matrix2d.apply(transform, p)
             expect(approximately(res[0], output[0])).toBe(true)
             expect(approximately(res[1], output[1])).toBe(true)
@@ -99,8 +98,8 @@ describe('Matrix2d', () => {
         expect(Matrix2d.isApproximatelyEqual(identityMatrix2d, Matrix2d.invert(identityMatrix2d))).toBe(true)
         expect(Matrix2d.isApproximatelyEqual([0, 0, 0, 0, 0, 0], Matrix2d.invert([0, 0, 0, 1, 0, 0]))).toBe(true)
 
-        expect(Matrix2d.isApproximatelyEqual([-17/43, -50/43, 25/43, (4 * 43 + 28) / 43, (15 * 43 + 15) / 43, (112 * 43 + 34) / 43], Matrix2d.invert([-4, -1, 0.5, 0.34, 5, -23]))).toBe(true)
-        expect(Matrix2d.isApproximatelyEqual([17/59, 50/59, -25/59, 100/59, -(11 * 59 + 11)/59, (34 * 59 + 44) / 59], Matrix2d.invert([2, -1, 0.5, 0.34, 5, -23]))).toBe(true)
+        expect(Matrix2d.isApproximatelyEqual([-17 / 43, -50 / 43, 25 / 43, (4 * 43 + 28) / 43, (15 * 43 + 15) / 43, (112 * 43 + 34) / 43], Matrix2d.invert([-4, -1, 0.5, 0.34, 5, -23]))).toBe(true)
+        expect(Matrix2d.isApproximatelyEqual([17 / 59, 50 / 59, -25 / 59, 100 / 59, -(11 * 59 + 11) / 59, (34 * 59 + 44) / 59], Matrix2d.invert([2, -1, 0.5, 0.34, 5, -23]))).toBe(true)
         expect(Matrix2d.isApproximatelyEqual([0.4, 0.4, -0.2, 0.8, -2, -2], Matrix2d.invert([2, -1, 0.5, 1, 5, 0]))).toBe(true)
     })
 })

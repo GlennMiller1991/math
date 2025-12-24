@@ -1,4 +1,4 @@
-import { Point, type IPoint2, type IPoint3 } from "../../src";
+import { Point, type IPoint2, type IPoint3 } from "@src";
 
 describe('points test', () => {
     let a2: IPoint2, b2: IPoint2;

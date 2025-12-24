@@ -1,5 +1,5 @@
-import { validateType } from "../type.utils.js"
-import { normalizeShade } from './utils.js';
+import { validateType } from "../type.utils.ts"
+import { normalizeShade } from './utils.ts';
 
 export class Color {
     constructor(private _red: number, private _green: number, private _blue: number, private _alpha = 255) {

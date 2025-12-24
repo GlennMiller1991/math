@@ -1,4 +1,4 @@
-import {Color} from './../../index.js'
+import {Color} from '@src'
 
 describe('Color', () => {
     let color: Color;

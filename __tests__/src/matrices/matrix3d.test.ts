@@ -1,4 +1,4 @@
-import { approximately, identityMatrix3d, Matrix2d, Matrix3d, type IMatrix3d } from "../../src"
+import {approximately, identityMatrix3d, Matrix3d, type IMatrix3d} from "@src"
 
 describe('Matrix3d', () => {
     let matrix: IMatrix3d
@@ -187,7 +187,7 @@ describe('Matrix3d', () => {
         expect(approximately(Matrix3d.determinant(identityMatrix3d), 1)).toBe(true)
         expect(approximately(Matrix3d.determinant([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]), 0))
             .toBe(true)
-            
+
         expect(approximately(
             Matrix3d.determinant(first), -17.5)
         ).toBe(true)
@@ -213,24 +213,24 @@ describe('Matrix3d', () => {
 
         expect(Matrix3d.isApproximatelyEqual(
             Matrix3d.invert(first),
-            [2/35, 2/35, 6/35, 39/35, 74/35, -23/35, 2/7, 2/7, -1/7, -(7 * 35 + 29)/35, -(13 * 35 + 29)/35, (4 * 35 + 18)/35]
+            [2 / 35, 2 / 35, 6 / 35, 39 / 35, 74 / 35, -23 / 35, 2 / 7, 2 / 7, -1 / 7, -(7 * 35 + 29) / 35, -(13 * 35 + 29) / 35, (4 * 35 + 18) / 35]
         )).toBe(true)
 
         expect(Matrix3d.isApproximatelyEqual(
             Matrix3d.invert(second),
-            [-2/55, -2/55, 12/55, -39/55, 16/55, 14/55, -2/11, -2/11, 1/11, (5 * 11 + 1)/11, -10/11, -(2 * 11 + 6)/11]
+            [-2 / 55, -2 / 55, 12 / 55, -39 / 55, 16 / 55, 14 / 55, -2 / 11, -2 / 11, 1 / 11, (5 * 11 + 1) / 11, -10 / 11, -(2 * 11 + 6) / 11]
         )).toBe(true)
 
 
         expect(Matrix3d.isApproximatelyEqual(
             Matrix3d.invert(third),
-            [-10/41, 2/41, 12/41, -39/41, 16/41, 14/41, -11/41, -6/41, 5/41, 264/205, -61/205, -89/82]
+            [-10 / 41, 2 / 41, 12 / 41, -39 / 41, 16 / 41, 14 / 41, -11 / 41, -6 / 41, 5 / 41, 264 / 205, -61 / 205, -89 / 82]
         )).toBe(true)
 
         expect(Matrix3d.isApproximatelyEqual(
             Matrix3d.invert(fourth),
-            [121/232, -(2 * 58 + 39)/58, 15/58, 39/464, -49/116, 1 / 116, 5/ 58, -20/29, 1/29, -(928 + 587)/928, (8 * 232 + 101)/232, -917/1160]
+            [121 / 232, -(2 * 58 + 39) / 58, 15 / 58, 39 / 464, -49 / 116, 1 / 116, 5 / 58, -20 / 29, 1 / 29, -(928 + 587) / 928, (8 * 232 + 101) / 232, -917 / 1160]
         )).toBe(true)
- 
+
     })
 })

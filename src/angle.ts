@@ -1,5 +1,5 @@
-import type { IPoint2 } from "../index.js";
-import { isCorrectNumber, toPositive } from "./utils.js";
+import type { IPoint2 } from "./figures/index.ts";
+import { isCorrectNumber, toPositive } from "./utils.ts";
 
 export enum AngleUnits {
     Deg = 0,

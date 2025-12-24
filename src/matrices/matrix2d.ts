@@ -1,5 +1,7 @@
-import { Angle, AngleUnits, approximately, type IPoint2 } from "../index.js";
-import type { IFixedLengthArray } from "../type.utils.js";
+import {IPoint2} from "../figures/index.ts";
+import {IFixedLengthArray} from "../type.utils.ts";
+import {Angle, AngleUnits} from "../angle.ts";
+import {approximately} from "../utils.ts";
 
 export type IMatrix2d = IFixedLengthArray<6, number>
 

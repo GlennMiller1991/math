@@ -1,4 +1,4 @@
-import { denormalize, normalize } from "../utils.js";
+import { denormalize, normalize } from "../utils.ts";
 
 export function normalizeShade(value: number) {
     return normalize(value, 255)

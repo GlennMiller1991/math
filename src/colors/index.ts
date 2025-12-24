@@ -1,2 +1,2 @@
-export * from './color.js'
-export * from './conic.gradient.js'
+export * from './color.ts'
+export * from './conic.gradient.ts'

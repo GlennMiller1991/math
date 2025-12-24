@@ -1,18 +1,38 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
-		"outDir": "./dist/bin",
-		"declarationDir": "./dist/types",
-		"declaration": true,
-		"declarationMap": true,
-		"allowSyntheticDefaultImports": true,
-		"removeComments": true,
-		"verbatimModuleSyntax": true
-	},
-	"exclude": [
-		"node_modules",
-		"__tests__"
-	]
+  "compilerOptions": {
+
+    // syntax
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "strictBuiltinIteratorReturn": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "allowJs": false,
+
+    // emit
+    "rewriteRelativeImportExtensions": true,
+    "target": "ESNext",
+    "noEmitOnError": true,
+    "removeComments": false,
+    "outDir": "dist/bin",
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "declarationMap": false,                  // Typically, source files are not emits, so there is no reason to emit source maps
+    "sourceMap": false,                       // Typically, source files are not emits, so there is no reason to emit source maps
+
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "stripInternal": true
+  },
+  "exclude": [
+    "./node_modules/",
+    "./dist/",
+    "./__tests__"
+  ]
 }

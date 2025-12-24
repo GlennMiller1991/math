@@ -1,4 +1,4 @@
-import { approximately, isCorrectNumber, toPositive } from "../src/index.js"
+import { approximately, isCorrectNumber, toPositive } from "@src"
 
 test('approximately', () => {
     expect(approximately(0, 0)).toBe(true)

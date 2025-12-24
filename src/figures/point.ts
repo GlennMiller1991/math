@@ -6,8 +6,14 @@ export type IPoint3 = [number, number, number]
 export type IPoint = IPoint2 | IPoint3
 
 export class Point {
-    static sum<T extends IPoint>(p1: T, p2: T): T {
-        return p1.map((c, i) => c + p2[i]) as T
+    static sum<T extends IPoint>(...ps: T[]): T {
+        let sum = ps[0];
+
+        for (let i = 1; i < ps.length; i++) {
+            sum = sum.map((c, j) => c + ps[i][j]) as T
+        }
+
+        return sum;
     }
 
     static scale<T extends IPoint>(p: T, scale: number): T {
@@ -50,7 +56,7 @@ export class Point {
      * @return скаляр, равный объёму ориентированного параллелограмма, 
      * построенного на переданных векторах
      */
-    static tripleProduct(crossFactorA: IPoint3, crossFactorB: IPoint3, dotFactor): number {
+    static tripleProduct(crossFactorA: IPoint3, crossFactorB: IPoint3, dotFactor: IPoint3): number {
         return Point.dotProduct(
             Point.crossProduct(crossFactorA, crossFactorB),
             dotFactor

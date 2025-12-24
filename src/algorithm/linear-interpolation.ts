@@ -1,4 +1,4 @@
-import type { INonEmptyArray } from "../type.utils.js";
+import type { INonEmptyArray } from "../type.utils.ts";
 
 export type IControlPoint = {
     controlPoint: number,

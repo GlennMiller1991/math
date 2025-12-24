@@ -1,1 +1,2 @@
-export * from './linear-interpolation.js'
+export * from './linear-interpolation.ts';
+export * from './centroid.ts';

@@ -1,5 +1,5 @@
-import { Color } from "./index.js"
-import type { IPoint2 } from "../index.js"
+import { Color } from "./color.ts"
+import type { IPoint2 } from "../figures/index.ts"
 
 export class ConicGradient {
     colors: { angle: number, color: Color }[]

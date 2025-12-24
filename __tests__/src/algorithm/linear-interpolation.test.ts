@@ -1,6 +1,4 @@
-import { LinearInterpolation } from '../../src/algorithm/linear-interpolation';
-import type { IControlPoint } from '../../src/algorithm/linear-interpolation';
-import { approximately } from '../../src/utils';
+import { approximately, LinearInterpolation, type IControlPoint } from '@src';
 
 describe('linear interpolation', () => {
 
