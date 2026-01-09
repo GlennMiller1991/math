@@ -1,5 +1,5 @@
 import { validateType } from "../type.utils.ts"
-import { normalizeShade } from './utils.ts';
+import {denormalizeShade} from './utils.ts';
 
 export class Color {
     constructor(private _red: number, private _green: number, private _blue: number, private _alpha = 255) {
@@ -22,7 +22,7 @@ export class Color {
     }
 
     set alpha(value: number) {
-        this._alpha = Math.max(Math.min(Math.round(value), 255), 0)
+        this._alpha = Math.max(Math.min(value, 1), 0)
     }
 
     get red() {
@@ -85,9 +85,9 @@ export class Color {
     static representation(color: Color, format: 'rgba' | 'hex' = 'hex') {
         switch (format) {
             case "rgba":
-                return `rgba(${color.red},${color.green},${color.blue},${normalizeShade(color.alpha)})`
+                return `rgba(${color.red},${color.green},${color.blue},${color.alpha})`
             case "hex":
-                return `#${color.red.toString(16)}${color.green.toString(16)}${color.blue.toString(16)}${color.alpha.toString(16)}`
+                return `#${color.red.toString(16)}${color.green.toString(16)}${color.blue.toString(16)}${denormalizeShade(color.alpha).toString(16)}`
             default:
                 validateType(format)
         }
