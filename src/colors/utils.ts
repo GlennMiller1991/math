@@ -5,5 +5,5 @@ export function normalizeShade(value: number) {
 }
 
 export function denormalizeShade(value: number) {
-    return denormalize(value, 255)
+    return Math.floor(denormalize(value, 255));
 }
