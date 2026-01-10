@@ -1,7 +1,17 @@
 import type { IPoint2 } from "../../figures/index.ts"
 import {BaseGradient} from "./base.gradient.ts";
+import {Color} from "../color.js";
 
 export class ConicGradient extends BaseGradient {
+
+    constructor(...colors: { percentage: number, color: Color }[]) {
+        super(...colors);
+
+        this.colors.push({
+            percentage: 1,
+            color: this.colors[0].color
+        })
+    }
 
     /**
      * Для использования метода, углы  должны быть в Turn единицах измерения

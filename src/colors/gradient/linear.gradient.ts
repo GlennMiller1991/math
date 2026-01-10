@@ -14,7 +14,7 @@ export class LinearGradient extends BaseGradient {
     toCSS(direction: string = 'to bottom') {
         let s = ''
 
-        for (let {color} of this.colors.slice(0, -1)) {
+        for (let {color} of this.colors) {
             if (s) s += ','
             s += color;
         }

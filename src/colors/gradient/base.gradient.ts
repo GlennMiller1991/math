@@ -5,11 +5,7 @@ export abstract class BaseGradient {
     protected colors: { percentage: number, color: Color }[]
 
     constructor(...colors: typeof this.colors) {
-        this.colors = [...colors].sort((a, b) => a.percentage - b.percentage)
-        this.colors.push({
-            percentage: 1,
-            color: this.colors[0].color
-        })
+        this.colors = [...colors].sort((a, b) => a.percentage - b.percentage);
     }
 
     /**
