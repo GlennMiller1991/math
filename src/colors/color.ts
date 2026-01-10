@@ -1,5 +1,10 @@
-import { validateType } from "../type.utils.ts"
+import {validateType} from "../type.utils.ts"
 import {denormalizeShade} from './utils.ts';
+
+export enum ColorStringFormat {
+    RGBA = 'rgba',
+    HEX = 'hex',
+}
 
 export class Color {
     constructor(private _red: number, private _green: number, private _blue: number, private _alpha = 1) {
@@ -16,7 +21,7 @@ export class Color {
     set green(value: number) {
         this._green = Math.max(Math.min(Math.round(value), 255), 0)
     }
-    
+
     set blue(value: number) {
         this._blue = Math.max(Math.min(Math.round(value), 255), 0)
     }
@@ -45,7 +50,7 @@ export class Color {
         return this.toString()
     }
 
-    toString(format: Parameters<typeof Color.representation>[1] = 'hex') {
+    toString(format: Parameters<typeof Color.representation>[1] = ColorStringFormat.HEX) {
         return Color.representation(this, format)
     }
 
@@ -82,15 +87,23 @@ export class Color {
         return Color.toNumber(c1) === Color.toNumber(c2)
     }
 
-    static representation(color: Color, format: 'rgba' | 'hex' = 'hex') {
+    static representation(color: Color, format: ColorStringFormat = ColorStringFormat.HEX) {
         switch (format) {
-            case "rgba":
+            case ColorStringFormat.RGBA:
                 return `rgba(${color.red},${color.green},${color.blue},${color.alpha})`
-            case "hex":
-                return `#${color.red.toString(16)}${color.green.toString(16)}${color.blue.toString(16)}${denormalizeShade(color.alpha).toString(16)}`
+            case ColorStringFormat.HEX:
+                return `#${this.shadeToHexDigitsDenormalized(color.red)}${this.shadeToHexDigitsDenormalized(color.green)}${this.shadeToHexDigitsDenormalized(color.blue)}${this.shadeToHexDigitsNormalized(color.alpha)}`
             default:
                 validateType(format)
         }
+    }
+
+    static shadeToHexDigitsNormalized(shade: number) {
+        return this.shadeToHexDigitsDenormalized(denormalizeShade(shade));
+    }
+
+    static shadeToHexDigitsDenormalized(shade: number) {
+        return shade.toString(16).padStart(2, '0');
     }
 
 }
