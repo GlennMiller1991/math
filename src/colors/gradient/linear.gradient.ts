@@ -14,12 +14,12 @@ export class LinearGradient extends BaseGradient {
     toCSS(direction: string = 'to bottom') {
         let s = ''
 
-        for (let color of this.colors) {
+        for (let {color} of this.colors) {
             if (s) s += ','
-            s += `rgb(${color.color.red},${color.color.green},${color.color.blue})`
+            s += color;
         }
 
-        return `conic-gradient(${direction}, ${s})`
+        return `linear-gradient(${direction}, ${s})`
     }
 
 }

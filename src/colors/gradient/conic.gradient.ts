@@ -21,9 +21,9 @@ export class ConicGradient extends BaseGradient {
     toCSS() {
         let s = ''
 
-        for (let color of this.colors) {
+        for (let {color} of this.colors) {
             if (s) s += ','
-            s += `rgb(${color.color.red},${color.color.green},${color.color.blue})`
+            s += color;
         }
 
         s = `conic-gradient(in srgb from 0.25turn at 50% 50%, ${s})`
