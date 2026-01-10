@@ -2,7 +2,7 @@ import { validateType } from "../type.utils.ts"
 import {denormalizeShade} from './utils.ts';
 
 export class Color {
-    constructor(private _red: number, private _green: number, private _blue: number, private _alpha = 255) {
+    constructor(private _red: number, private _green: number, private _blue: number, private _alpha = 1) {
         this.red = _red
         this.green = _green
         this.blue = _blue
