@@ -1,6 +1,6 @@
 import type { IPoint2 } from "../../figures/index.ts"
 import {BaseGradient} from "./base.gradient.ts";
-import {Color} from "../color.js";
+import {Color} from "../color.ts";
 
 export class ConicGradient extends BaseGradient {
 

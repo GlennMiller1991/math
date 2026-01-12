@@ -29,4 +29,5 @@ export class LinearInterpolation {
         const coef = (atPoint - start.controlPoint) / (end.controlPoint - start.controlPoint);
         return (end.value - start.value) * coef + start.value
     }
+
 }

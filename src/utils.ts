@@ -40,3 +40,7 @@ export function isNatural(n: number) {
 export function isNonNegativeInteger(n: number) {
     return !isNegative(n) && isInteger(n);
 }
+
+export function clamp(value: number, min = 0, max = 1) {
+    return Math.min(Math.max(value, min), max);
+}

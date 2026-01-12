@@ -4,7 +4,7 @@ import {Color} from "./color.ts";
  * Смешение цветов
  */
 export function blend(background: Color, ...foregrounds: Color[]) {
-    let temp: number;
+    let premulBgAlpha: number;
     let red, green, blue: number;
 
     for (let foreground of foregrounds) {
@@ -17,10 +17,10 @@ export function blend(background: Color, ...foregrounds: Color[]) {
             continue;
         }
 
-        temp = bgAlpha * (1 - fgAlpha) / alpha;
-        red = Math.floor(foreground.red * fgAlpha / alpha + background.red * temp);
-        green = Math.floor(foreground.green * fgAlpha / alpha + background.green * temp);
-        blue = Math.floor(foreground.blue * fgAlpha / alpha + background.blue * temp);
+        premulBgAlpha = bgAlpha * (1 - fgAlpha);
+        red = Math.floor((foreground.red * fgAlpha + background.red * premulBgAlpha) / alpha);
+        green = Math.floor((foreground.green * fgAlpha + background.green * premulBgAlpha) / alpha);
+        blue = Math.floor((foreground.blue * fgAlpha + background.blue * premulBgAlpha) / alpha);
 
         background = new Color(red, green, blue, alpha);
     }

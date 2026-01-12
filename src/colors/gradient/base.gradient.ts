@@ -1,5 +1,6 @@
 import {Color} from "../color.ts";
-import {denormalizeShade} from "../utils.ts";
+import {denormalizeShade, normalizeShade} from "../utils.ts";
+import {clamp, normalize} from "../../utils.ts";
 
 export abstract class BaseGradient {
     protected colors: { percentage: number, color: Color }[]
@@ -48,11 +49,11 @@ export abstract class BaseGradient {
             let redDif = next.color.red - prev.color.red
             let greenDif = next.color.green - prev.color.green
             let blueDif = next.color.blue - prev.color.blue
-            let alphaDif = denormalizeShade(next.color.alpha) - denormalizeShade(prev.color.alpha);
+            let alphaDif = next.color.alpha - prev.color.alpha;
             let redDifColor = color.red - prev.color.red
             let greenDifColor = color.green - prev.color.green
             let blueDifColor = color.blue - prev.color.blue
-            let alphaDifColor = denormalizeShade(color.alpha) - denormalizeShade(prev.color.alpha);
+            let alphaDifColor = color.alpha - prev.color.alpha;
 
             if (
                 ((redDifColor >= 0 && redDifColor <= redDif) || (redDifColor <= 0 && redDifColor >= redDif)) &&
@@ -61,10 +62,10 @@ export abstract class BaseGradient {
                 ((alphaDifColor >= 0 && alphaDifColor <= alphaDif) || (alphaDifColor <= 0 && alphaDifColor >= alphaDif))
             ) {
 
-                const redCoef = ((color.red - prev.color.red) / (next.color.red - prev.color.red))
-                const greenCoef = ((color.green - prev.color.green) / (next.color.green - prev.color.green))
-                const blueCoef = ((color.blue - prev.color.blue) / (next.color.blue - prev.color.blue))
-                const alphaCoef = ((color.alpha - prev.color.alpha) / (next.color.alpha - prev.color.alpha));
+                const redCoef = redDifColor / redDif;
+                const greenCoef = greenDifColor / greenDif;
+                const blueCoef = blueDifColor / blueDif;
+                const alphaCoef = (alphaDifColor / alphaDif);
                 const coefs = [redCoef, greenCoef, blueCoef, alphaCoef].filter(Boolean)
                 return (next.percentage - prev.percentage) * Math.min(...coefs) + prev.percentage
             }
@@ -72,11 +73,41 @@ export abstract class BaseGradient {
         return undefined
     }
 
+
     isColorInRange(color: Color): boolean {
         return Boolean(this.getPercentageByColor(color));
     }
 
 
     abstract toCanvas(ctx: CanvasRenderingContext2D, ...args: any): CanvasGradient;
+
     abstract toCSS(...args: any): string;
+
+    static restorationColor(startColor: Color, endColor: Color, value: number, startValue = 0, endValue = 1) {
+        if (value < startValue || value > endValue) throw new Error("invalid value");
+
+        if (value === startValue) return startColor;
+        if (value === endValue) return endColor;
+
+        value = normalize(value, endValue, startValue);
+
+        const color = new Color(0, 0, 0, 0);
+        let normalizedStart: number, normalizedEnd: number, resultShade;
+
+        for (let key of ['red', 'green', 'blue', 'alpha'] as const) {
+            normalizedStart = startColor[key];
+            normalizedEnd = endColor[key];
+            if (key !== 'alpha') {
+                normalizedStart = normalizeShade(normalizedStart);
+                normalizedEnd = normalizeShade(normalizedEnd);
+            }
+
+            resultShade = normalizedStart + (normalizedEnd - normalizedStart) * value;
+            resultShade = clamp(resultShade);
+
+            color[key] = key === 'alpha' ? resultShade : denormalizeShade(resultShade);
+        }
+
+        return color;
+    }
 }
