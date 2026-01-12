@@ -80,7 +80,7 @@ export class Color {
     }
 
     static toNumber(color: Color) {
-        return (((color.red << 16) | color.green) << 16) | color.blue
+        return color.red << 16 | color.green << 8 | color.blue;
     }
 
     static areEquals(c1: Color, c2: Color) {
