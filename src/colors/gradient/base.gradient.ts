@@ -83,9 +83,7 @@ export abstract class BaseGradient {
 
     abstract toCSS(...args: any): string;
 
-    static restorationColor(startColor: Color, endColor: Color, value: number, startValue = 0, endValue = 1) {
-        if (value < startValue || value > endValue) throw new Error("invalid value");
-
+    static restoreColor(startColor: Color, endColor: Color, value: number, startValue = 0, endValue = 1) {
         if (value === startValue) return startColor;
         if (value === endValue) return endColor;
 
